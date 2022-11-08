@@ -1,5 +1,6 @@
-import main from '../assets/images/main-alternative.svg';
+import main from '../assets/images/main.svg';
 import Wrapper from '../assets/wrappers/LandingPage';
+import { Link } from 'react-router-dom';
 import { Logo } from '../components'; // don't need to say the path, the index.js is the default one.
 
 const Landing = () => {
@@ -20,7 +21,9 @@ const Landing = () => {
             banh mi. Bicycle rights four dollar toast artisan jianbing
             farm-to-table,
           </p>
-          <button className='btn btn-hero'>Login/Resister</button>
+          <Link className='btn btn-hero' to='/register'>
+            Login/Resister
+          </Link>
         </div>
         <img src={main} alt='job hunt' className='img main-img' />
       </div>
