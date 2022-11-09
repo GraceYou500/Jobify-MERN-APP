@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Logo } from '../components';
+import { Logo, FormRow, Alert } from '../components';
 import Wrapper from '../assets/wrappers/RegisterPage';
 
 const initialState = {
@@ -7,15 +7,17 @@ const initialState = {
   email: '',
   password: '',
   isMember: true,
+  showAlert: false,
 };
 
 const Register = () => {
   const [values, setValues] = useState(initialState);
-
+  console.log(values);
   // global state and useNavigate
 
   const handleChange = (e) => {
     console.log(e.target);
+    // setValues({ ...values, name: e.target.value });
   };
 
   const onSubmit = (e) => {
@@ -28,6 +30,7 @@ const Register = () => {
       <form className='form' onSubmit={onSubmit}>
         <Logo />
         <h3>Login</h3>
+        {values.showAlert && <Alert />}
         {/* name input */}
         <div className='form-row'>
           <label htmlFor='name' className='form-label'>
@@ -41,6 +44,20 @@ const Register = () => {
             className='form-input'
           />
         </div>
+        <FormRow
+          type='email'
+          name='email'
+          value={values.email}
+          handleChange={handleChange}
+        />
+
+        <FormRow
+          type='password'
+          name='password'
+          value={values.password}
+          handleChange={handleChange}
+        />
+
         <button type='submit' className='btn btn-block'>
           submit
         </button>
