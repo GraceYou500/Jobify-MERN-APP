@@ -12,22 +12,28 @@ const initialState = {
 
 const Register = () => {
   const [values, setValues] = useState(initialState);
-  console.log(values);
+  // console.log(values);
   // global state and useNavigate
-  const { isLoading, showAlert } = useAppContext();
+  const { isLoading, showAlert, displayAlert } = useAppContext();
 
   const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember });
   };
 
   const handleChange = (e) => {
-    console.log(e.target);
-    // setValues({ ...values, name: e.target.value });
+    // console.log(e.target);
+    setValues({ ...values, [e.target.name]: e.target.value });
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target);
+
+    const { email, password, isMember, name } = values;
+    if (!email || !password || (!isMember && !name)) {
+      displayAlert();
+      return;
+    }
+    console.log(values);
   };
 
   return (
