@@ -2,16 +2,24 @@ import express from 'express';
 const app = express();
 import dotenv from 'dotenv';
 dotenv.config();
-import connectDB from './db/connect.js'; // make sure it is above middleware import
+
+// db and authenticateUser
+import connectDB from './db/connect.js'; // make sure connectDB is above middleware import
+
+// routers
+import authRouter from './routes/authRoutes.js';
 
 // middleware
 import notFoundMiddleware from './middleware/not-found.js';
 import errorHandlerMiddleware from './middleware/error-handler.js';
 
+app.use(express.json()); // this will make only json data available to us in the controllers, since we'll have post req, we look for staffs, and the staff => JSON data will be pass through us using the express.json() middleware.
+
 app.get('/', (req, res) => {
-  throw new Error('Error');
   res.send('Welcome!');
 });
+
+app.use('/api/v1/auth', authRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
