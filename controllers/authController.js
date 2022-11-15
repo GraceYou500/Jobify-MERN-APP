@@ -1,12 +1,9 @@
 import User from '../models/User.js';
 
 const register = async (req, res) => {
-  try {
-    const user = await User.create(req.body);
-    res.status(201).json({ user });
-  } catch (error) {
-    res.status(500).json({ msg: 'there was an error' });
-  }
+  const user = await User.create(req.body);
+  res.status(201).json({ user });
+  // next middleware will log the error to errorHandlerMiddleware. But with express-async-errors package, we don't need try catch and don't need next to pass the error, it will automatively pass to error handler middleware.
 };
 
 const login = async (req, res) => {
