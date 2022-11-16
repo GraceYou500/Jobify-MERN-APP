@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 const app = express();
 import dotenv from 'dotenv';
 dotenv.config();
@@ -15,10 +16,11 @@ import jobRouter from './routes/jobRoutes.js';
 import notFoundMiddleware from './middleware/not-found.js';
 import errorHandlerMiddleware from './middleware/error-handler.js';
 
+app.use(cors());
 app.use(express.json()); // this will make only json data available to us in the controllers, since we'll have post req, we look for staffs, and the staff => JSON data will be pass through us using the express.json() middleware.
 
 app.get('/', (req, res) => {
-  res.send('Welcome!');
+  res.json({ msg: 'Welcome!' });
 });
 
 app.use('/api/v1/auth', authRouter);
