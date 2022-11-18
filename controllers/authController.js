@@ -8,6 +8,7 @@ import {
 
 const register = async (req, res) => {
   const { name, email, password } = req.body;
+  console.log('register...........', name, email, password);
   if (!name || !email || !password) {
     throw new BadRequestError('Please provide all values.');
   }
