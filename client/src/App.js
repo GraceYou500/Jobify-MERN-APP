@@ -1,4 +1,4 @@
-import { Landing, Register, Error } from './pages';
+import { Landing, Register, Error, ProtectedRoute } from './pages';
 import {
   SharedLayout,
   AllJobs,
@@ -12,7 +12,14 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<SharedLayout />}>
+        <Route
+          path='/'
+          element={
+            <ProtectedRoute>
+              <SharedLayout />
+            </ProtectedRoute>
+          }
+        >
           {/* nested path don't need "/stats", without "/", because the nested route will relative to parent route automatively. */}
           <Route index element={<Stats />} />
           <Route path='all-jobs' element={<AllJobs />} />
