@@ -23,9 +23,17 @@ const SmallSidebar = () => {
           </header>
           <div className='nav-links'>
             {links.map((item) => (
-              <div className='nav-link'>
-                {item.icon} {item.text}
-              </div>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? 'nav-link active' : 'nav-link'
+                }
+                to={item.path}
+                key={item.id}
+                onClick={toggleSidebar}
+              >
+                <span className='icon'>{item.icon}</span>
+                {item.text}
+              </NavLink>
             ))}
           </div>
         </div>
