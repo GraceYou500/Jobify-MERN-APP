@@ -16,6 +16,7 @@ import jobRouter from './routes/jobRoutes.js';
 // middleware
 import notFoundMiddleware from './middleware/not-found.js';
 import errorHandlerMiddleware from './middleware/error-handler.js';
+import authenticateUser from './middleware/auth.js';
 
 app.use(express.json()); // this will make only json data available to us in the controllers, since we'll have post req, we look for staffs, and the staff => JSON data will be pass through us using the express.json() middleware.
 
@@ -32,7 +33,7 @@ app.get('/api/v1', (req, res) => {
 });
 
 app.use('/api/v1/auth', authRouter);
-app.use('/api/v1/jobs', jobRouter);
+app.use('/api/v1/jobs', authenticateUser, jobRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
