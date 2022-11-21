@@ -209,6 +209,8 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  const createJob = async () => {};
+
   return (
     <AppContext.Provider
       value={{
