@@ -63,3 +63,6 @@ npm install normalize.css
 - if any questions about normalize or specific styles
 - Coding Addict - [Default Starter Video](https://youtu.be/UDdyGNlQK5w)
 - Repo - [Default Starter Repo](https://github.com/john-smilga/default-starter)
+
+// proxy in client-json-package:
+// proxy not means change all setups, meaning proxy just adds some fullbacks, if sth we cannot get from front end, it will try to look at backend 5000 to try to get any resources.

@@ -38,6 +38,16 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  // setup global axios headers
+
+  // axios.defaults.headers['Authorization'] = `Bearer ${state.token}`; // have disadvantage=> it will pass the token to every API path, even the api don't need token.
+
+  // setup Axios custom instance via axios library
+  const authFetch = axios.create({
+    baseURL: '/api/v1',
+    headers: { Authorization: `Bearer ${state.token}` },
+  });
+
   const displayAlert = () => {
     dispatch({ type: DISPLAY_ALERT });
 
@@ -148,7 +158,13 @@ const AppProvider = ({ children }) => {
   };
 
   const updateUser = async (currentUser) => {
-    console.log('appContext updateUser.......', currentUser);
+    try {
+      const { data } = await authFetch.patch('/auth/updateUser', currentUser);
+
+      console.log('Context UpdateUser.............', data);
+    } catch (error) {
+      console.log(error.response);
+    }
   };
 
   return (
