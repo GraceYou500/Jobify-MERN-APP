@@ -45,8 +45,32 @@ const AppProvider = ({ children }) => {
   // setup Axios custom instance via axios library
   const authFetch = axios.create({
     baseURL: '/api/v1',
-    headers: { Authorization: `Bearer ${state.token}` },
   });
+
+  // requst interceptor
+  authFetch.interceptors.request.use(
+    (config) => {
+      // config.headers['Authorization'] = `Bearer ${state.token}`;
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
+
+  // response interceptor
+  authFetch.interceptors.response.use(
+    (response) => {
+      return response;
+    },
+    (error) => {
+      console.log(error.response);
+      if (error.response.status === 401) {
+        console.log('AUTH ERROR');
+      }
+      return Promise.reject(error);
+    }
+  );
 
   const displayAlert = () => {
     dispatch({ type: DISPLAY_ALERT });
