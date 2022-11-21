@@ -15,10 +15,10 @@ const auth = async (req, res, next) => {
 
     req.user = { userId: payload.userId };
 
-    console.log(authHeader);
-    console.log('token...........', token);
-    console.log('payload...........', payload);
-    console.log('req.user...........', req.user);
+    // console.log(authHeader);
+    // console.log('token...........', token);
+    // console.log('payload...........', payload);
+    // console.log('req.user...........', req.user);
     next(); // next middleware will pass to updateUser controller automativelly.
   } catch (error) {
     throw new UnauthenticatedError('Authentication invalid');
