@@ -21,7 +21,7 @@ const Profile = () => {
     const currentUser = { name, email, location, lastName };
     console.log('currentUser.............', currentUser);
 
-    updateUser({ name, email, location, lastName }); // same as pass in currentUser
+    updateUser(currentUser); // same as pass in currentUser
   };
   return (
     <Wrapper>
