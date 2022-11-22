@@ -255,6 +255,8 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  const getAllJobs = async () => {};
+
   return (
     <AppContext.Provider
       value={{
