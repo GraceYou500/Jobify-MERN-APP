@@ -18,6 +18,8 @@ import {
   UPDATE_USER_BEGIN,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
+  HANDLE_CHANGE,
+  CLEAR_VALUES,
 } from './actions';
 
 const token = localStorage.getItem('token');
@@ -217,7 +219,13 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
-  const createJob = async () => {};
+  const handleChange = ({ name, value }) => {
+    dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
+  };
+
+  const clearValues = () => {
+    dispatch({ type: CLEAR_VALUES });
+  };
 
   return (
     <AppContext.Provider
@@ -230,6 +238,8 @@ const AppProvider = ({ children }) => {
         toggleSidebar,
         logoutUser,
         updateUser,
+        handleChange,
+        clearValues,
       }}
     >
       {children}

@@ -1,9 +1,10 @@
 import { useAppContext } from '../../context/appContext';
-import { Alert, FormRow } from '../../components';
+import { Alert, FormRow, FormSelect } from '../../components';
 import Wrapper from '../../assets/wrappers/DashboardFormPage';
 
 const AddJob = () => {
   const {
+    isLoading,
     showAlert,
     displayAlert,
     position,
@@ -14,6 +15,8 @@ const AddJob = () => {
     status,
     jobLocation,
     isEditing,
+    handleChange,
+    clearValues,
   } = useAppContext();
 
   const submitHandler = (e) => {
@@ -32,6 +35,8 @@ const AddJob = () => {
     const value = e.target.value;
 
     console.log('handleInputChange..............', `${name}: ${value}`);
+
+    handleChange({ name, value });
   };
 
   return (
@@ -59,13 +64,37 @@ const AddJob = () => {
             name='jobLocation'
             handleChange={handleInputChange}
           />
-          {/* Job Type */}
-          {/* Status */}
+          <FormSelect
+            value={status}
+            labelText='job status'
+            name='status'
+            handleChange={handleInputChange}
+            options={statusOptions}
+          />
+          <FormSelect
+            value={jobType}
+            labelText='job Type'
+            name='jobType'
+            handleChange={handleInputChange}
+            options={jobTypeOptions}
+          />
           <div className='btn-container'>
-            <button type='submit' className='btn btn-block submit-btn'>
-              submit
+            <button
+              type='submit'
+              className='btn btn-block submit-btn'
+              disabled={isLoading}
+            >
+              {isLoading ? 'Please wait...' : 'submit'}
             </button>
-            <button className='clear-btn'>Clear</button>
+            <button
+              className='btn btn-block clear-btn'
+              onClick={(e) => {
+                e.preventDefault();
+                clearValues();
+              }}
+            >
+              Clear
+            </button>
           </div>
         </div>
       </form>
