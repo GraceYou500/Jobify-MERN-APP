@@ -20,6 +20,9 @@ import {
   UPDATE_USER_ERROR,
   HANDLE_CHANGE,
   CLEAR_VALUES,
+  CREATE_JOB_BEGIN,
+  CREATE_JOB_SUCCESS,
+  CREATE_JOB_ERROR,
 } from './actions';
 
 const token = localStorage.getItem('token');
@@ -227,6 +230,31 @@ const AppProvider = ({ children }) => {
     dispatch({ type: CLEAR_VALUES });
   };
 
+  const createJob = async () => {
+    dispatch({ type: CREATE_JOB_BEGIN });
+    try {
+      const { company, position, jobLocation, status, jobType } = state;
+      await authFetch.post('/jobs', {
+        company,
+        position,
+        jobLocation,
+        status,
+        jobType,
+      });
+
+      dispatch({ type: CREATE_JOB_SUCCESS });
+      dispatch({ type: CLEAR_VALUES });
+    } catch (error) {
+      if (error.response.status === 401) return;
+      dispatch({
+        type: CREATE_JOB_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+
+    clearAlert();
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -240,6 +268,7 @@ const AppProvider = ({ children }) => {
         updateUser,
         handleChange,
         clearValues,
+        createJob,
       }}
     >
       {children}
