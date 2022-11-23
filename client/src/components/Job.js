@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Job = () => {
+const Job = ({ company, status, jobLocation, jobType, position }) => {
   return (
     <div>
-      <h3>Single Job</h3>
+      <h5>{company}</h5>
     </div>
   );
 };

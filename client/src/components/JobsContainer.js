@@ -1,11 +1,39 @@
-import React from 'react';
+import { useEffect } from 'react';
 import Wrapper from '../assets/wrappers/JobsContainer';
-import { Job } from '../components';
+import { useAppContext } from '../context/appContext';
+import { Job, Loading } from '../components';
 
 const JobsContainer = () => {
+  const { getJobs, isLoading, jobs, totalJobs, numOfPages, page } =
+    useAppContext();
+
+  useEffect(() => {
+    getJobs();
+  }, []);
+
+  if (isLoading) {
+    return <Loading center />;
+  }
+
+  if (jobs.length === 0) {
+    return (
+      <Wrapper>
+        <h2>No jobs to display...</h2>
+      </Wrapper>
+    );
+  }
+
   return (
     <Wrapper>
-      <h3>JobsContainer</h3>
+      <h5>
+        {totalJobs} job{jobs.length > 0 && 's'} found
+      </h5>
+      <div className='jobs'>
+        {jobs.map((job) => (
+          <Job key={job._id} {...job} />
+        ))}
+      </div>
+      {/* pagination buttons */}
     </Wrapper>
   );
 };

@@ -9,8 +9,10 @@ import JobsContainer from './JobsContainer';
 import SearchContainer from './SearchContainer';
 import Job from './Job';
 import JobInfo from './JobInfo';
+import Loading from './Loading';
 
 export {
+  Loading,
   Logo,
   FormRow,
   Alert,
