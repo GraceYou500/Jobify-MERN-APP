@@ -1,5 +1,5 @@
 import Job from '../models/Job.js';
-import { StatusCodes } from 'http-status-codes';
+import { OK, StatusCodes } from 'http-status-codes';
 import {
   BadRequestError,
   NotFoundError,
@@ -22,13 +22,22 @@ const createJob = async (req, res) => {
 };
 
 const deleteJob = async (req, res) => {
-  res.send('deleteJob');
+  const { id: jobId } = req.params;
+
+  const job = await Job.findOne({ _id: jobId });
+  if (!job) {
+    throw new NotFoundError(`Not found the job ${jobId}`);
+  }
+
+  checkPermissions(req.user, job.createdBy);
+
+  await job.remove();
+  res.status(StatusCodes.OK).json({ msg: 'Success! Job removed' });
 };
 
 const getAllJobs = async (req, res) => {
   const jobs = await Job.find({ createdBy: req.user.userId });
   res
-
     .status(StatusCodes.OK)
     .json({ jobs, totalJobs: jobs.length, numOfPages: 1 });
 };
