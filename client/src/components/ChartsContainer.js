@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Wrapper from '../assets/wrappers/ChartsContainer';
 import { useAppContext } from '../context/appContext';
-import BarChart from './BarChart';
-import AreaChart from './AreaChart';
+import BarChartComponent from './BarChart';
+import AreaChartComponent from './AreaChart';
 
 const ChartsContainer = () => {
   const [chartBar, setChartBar] = useState(true);
@@ -18,7 +18,11 @@ const ChartsContainer = () => {
       <button type='button' onClick={toggleBarChart}>
         {chartBar ? 'Area Chart' : 'Bar Chart'}
       </button>
-      {chartBar ? <BarChart data={data} /> : <AreaChart data={data} />}
+      {chartBar ? (
+        <BarChartComponent data={data} />
+      ) : (
+        <AreaChartComponent data={data} />
+      )}
     </Wrapper>
   );
 };
