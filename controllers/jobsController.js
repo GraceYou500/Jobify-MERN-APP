@@ -7,6 +7,7 @@ import {
 } from '../errors/index.js';
 import checkPermissions from '../utils/checkPermissions.js';
 import mongoose from 'mongoose';
+import moment from 'moment';
 
 const createJob = async (req, res) => {
   const { company, position } = req.body;
@@ -95,7 +96,33 @@ const showStats = async (req, res) => {
     interview: stats.interview || 0,
   };
 
-  let monthlyApplications = [];
+  let monthlyApplications = await Job.aggregate([
+    { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
+    {
+      $group: {
+        _id: { year: { $year: '$createdAt' }, month: { $month: '$createdAt' } },
+        count: { $sum: 1 },
+      },
+    },
+    { $sort: { '_id.year': -1, '_id.month': -1 } },
+    { $limit: 6 },
+  ]);
+  //sort: -1 => we want the latest month and year.
+
+  monthlyApplications = monthlyApplications
+    .map((item) => {
+      const {
+        _id: { year, month },
+        count,
+      } = item;
+      const date = moment()
+        .month(month - 1)
+        .year(year)
+        .format('MMM Y');
+      return { date, count };
+    })
+    .reverse();
+  // month -1: in moment, the month is from 0 to 11, but in mongoose the month forom 1 to 12, so need to -1 for moment. reverse because we want to show the date from oldest to new (in the last 6 months).
 
   res.status(StatusCodes.OK).json({ defaultStats, monthlyApplications });
 };
