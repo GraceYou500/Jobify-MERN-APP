@@ -12,8 +12,10 @@ import JobInfo from './JobInfo';
 import Loading from './Loading';
 import StatsContainer from './StatsContainer';
 import ChartsContainer from './ChartsContainer';
+import PageBtnContainer from './PageBtnContainer';
 
 export {
+  PageBtnContainer,
   ChartsContainer,
   StatsContainer,
   Loading,
