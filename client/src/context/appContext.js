@@ -293,8 +293,8 @@ const AppProvider = ({ children }) => {
         payload: { jobs, totalJobs, numOfPages },
       });
     } catch (error) {
-      console.log(error.response);
-      // logoutUser();
+      // console.log(error.response);
+      logoutUser();
     }
     clearAlert(); // just precaution, in our case, we can delete it.
   };
@@ -337,8 +337,8 @@ const AppProvider = ({ children }) => {
       await authFetch.delete(`/jobs/${jobId}`);
       getJobs();
     } catch (error) {
-      console.log(error.response);
-      // logoutUser();
+      // console.log(error.response);
+      logoutUser();
     }
   };
 
@@ -355,8 +355,8 @@ const AppProvider = ({ children }) => {
         },
       });
     } catch (error) {
-      console.log(error.response);
-      // logoutUser();
+      // console.log(error.response);
+      logoutUser();
     }
 
     clearAlert();
