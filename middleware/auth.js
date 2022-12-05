@@ -13,12 +13,10 @@ const auth = async (req, res, next) => {
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
 
-    req.user = { userId: payload.userId };
-
-    // console.log(authHeader);
-    // console.log('token...........', token);
+    const testUser = payload.userId === '638da6824dc1c9bfe4a6dcfa';
+    req.user = { userId: payload.userId, testUser };
     // console.log('payload...........', payload);
-    // console.log('req.user...........', req.user);
+
     next(); // next middleware will pass to updateUser controller automativelly.
   } catch (error) {
     throw new UnauthenticatedError('Authentication invalid');

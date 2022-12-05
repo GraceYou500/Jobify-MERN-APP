@@ -39,6 +39,7 @@ const deleteJob = async (req, res) => {
 
 const getAllJobs = async (req, res) => {
   const { status, jobType, sort, search } = req.query;
+  // console.log('test user...........', req.user);
 
   const queryObject = { createdBy: req.user.userId };
 

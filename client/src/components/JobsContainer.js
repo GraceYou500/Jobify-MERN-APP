@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import Wrapper from '../assets/wrappers/JobsContainer';
 import { useAppContext } from '../context/appContext';
-import { Job, Loading, PageBtnContainer } from '.';
+import { Job, Loading, PageBtnContainer, Alert } from '.';
 
 const JobsContainer = () => {
   const {
@@ -15,6 +15,7 @@ const JobsContainer = () => {
     searchStatus,
     searchType,
     sort,
+    showAlert,
   } = useAppContext();
 
   useEffect(() => {
@@ -36,6 +37,7 @@ const JobsContainer = () => {
 
   return (
     <Wrapper>
+      {showAlert && <Alert />}
       <h5>
         {totalJobs} job{jobs.length > 1 && 's'} found
       </h5>
