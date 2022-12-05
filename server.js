@@ -10,6 +10,10 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import path from 'path';
 
+import helmet from 'helmet';
+import xss from 'xss-clean';
+import mongoSanitize from 'express-mongo-sanitize';
+
 // db and authenticateUser
 import connectDB from './db/connect.js'; // make sure connectDB is above middleware import
 
@@ -28,6 +32,9 @@ app.use(express.static(path.resolve(__dirname, './client/build')));
 // use express.static to serve the front end as our public assets
 
 app.use(express.json()); // this will make only json data available to us in the controllers, since we'll have post req, we look for staffs, and the staff => JSON data will be pass through us using the express.json() middleware.
+app.use(helmet());
+app.use(xss());
+app.use(mongoSanitize());
 
 if (process.env.NODE_ENV !== 'production') {
   app.use(morgan('dev'));
