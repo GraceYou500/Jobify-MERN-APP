@@ -7,9 +7,14 @@ const ProtectedRoute = ({ children }) => {
   const { user } = useAppContext();
 
   useEffect(() => {
-    if (!user) {
-      navigate('/landing');
-    }
+    // check user,
+    // if no user, check token
+    // if is token, use token get user
+    // if request sucess, put user in context
+    // other landing
+    // if (!user) {
+    //   navigate('/landing');
+    // }
   }, [user, navigate]);
 
   return children;

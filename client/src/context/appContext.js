@@ -37,24 +37,20 @@ import {
   DELETE_JOB_ERROR,
 } from './actions';
 
-const token = localStorage.getItem('token');
-const user = localStorage.getItem('user');
-const userLocation = localStorage.getItem('location');
-
 const initialState = {
   isLoading: false,
   showAlert: false,
   showSidebar: false,
   alertText: '',
   alertType: '',
-  user: user ? JSON.parse(user) : null,
-  token: token,
-  userLocation: userLocation || '',
+  user: null,
+
+  userLocation: '',
   isEditing: false,
   editJobId: '',
   position: '',
   company: '',
-  jobLocation: userLocation || '',
+  jobLocation: '',
   jobTypeOptions: ['part-time', 'full-time', 'remote', 'internship'],
   jobType: 'full-time',
   statusOptions: ['interview', 'declined', 'pending'],
@@ -86,16 +82,16 @@ const AppProvider = ({ children }) => {
     baseURL: '/api/v1',
   });
 
-  // requst interceptor
-  authFetch.interceptors.request.use(
-    (config) => {
-      config.headers['Authorization'] = `Bearer ${state.token}`;
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  );
+  // requst interceptor => token is reading by cookie now, no need for requst interceptor
+  // authFetch.interceptors.request.use(
+  //   (config) => {
+  //     config.headers['Authorization'] = `Bearer ${state.token}`;
+  //     return config;
+  //   },
+  //   (error) => {
+  //     return Promise.reject(error);
+  //   }
+  // );
 
   // response interceptor
   authFetch.interceptors.response.use(
@@ -123,17 +119,17 @@ const AppProvider = ({ children }) => {
     }, 3000);
   };
 
-  const addUserToLocalStorage = ({ user, token, location }) => {
-    localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('token', token);
-    localStorage.setItem('location', location);
-  };
+  // const addUserToLocalStorage = ({ user, token, location }) => {
+  //   localStorage.setItem('user', JSON.stringify(user));
+  //   localStorage.setItem('token', token);
+  //   localStorage.setItem('location', location);
+  // };
 
-  const removeUserFromLocalStorage = () => {
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    localStorage.removeItem('location');
-  };
+  // const removeUserFromLocalStorage = () => {
+  //   localStorage.removeItem('user');
+  //   localStorage.removeItem('token');
+  //   localStorage.removeItem('location');
+  // };
 
   const registerUser = async ({ currentUser }) => {
     dispatch({ type: REGISTER_USER_BEGIN });
@@ -142,14 +138,14 @@ const AppProvider = ({ children }) => {
       const response = await axios.post('/api/v1/auth/register', currentUser);
       // console.log('registerUser...........', response);
       const data = response.data;
-      const { user, token, location } = data;
+      const { user, location } = data;
       dispatch({
         type: REGISTER_USER_SUCCESS,
-        payload: { user, token, location },
+        payload: { user, location },
       });
 
       // save token in localStorage
-      addUserToLocalStorage({ token, user, location });
+      // addUserToLocalStorage({ token, user, location });
     } catch (error) {
       // console.log(error.response);
       dispatch({
@@ -166,14 +162,14 @@ const AppProvider = ({ children }) => {
     try {
       const response = await axios.post('/api/v1/auth/login', currentUser);
       const data = response.data;
-      const { user, token, location } = data;
+      const { user, location } = data;
 
       dispatch({
         type: LOGIN_USER_SUCCESS,
-        payload: { user, token, location },
+        payload: { user, location },
       });
 
-      addUserToLocalStorage({ user, token, location });
+      // addUserToLocalStorage({ user, token, location });
     } catch (error) {
       dispatch({
         type: LOGIN_USER_ERROR,
@@ -192,15 +188,15 @@ const AppProvider = ({ children }) => {
         currentUser
       );
       const data = response.data;
-      const { user, token, location } = data;
+      const { user, location } = data;
       // console.log('setup......', user, token, location);
 
       dispatch({
         type: SETUP_USER_SUCCESS,
-        payload: { user, token, location, alertText },
+        payload: { user, location, alertText },
       });
 
-      addUserToLocalStorage({ user, token, location });
+      // addUserToLocalStorage({ user, token, location });
     } catch (error) {
       dispatch({
         type: SETUP_USER_ERROR,
@@ -217,7 +213,7 @@ const AppProvider = ({ children }) => {
 
   const logoutUser = () => {
     dispatch({ type: LOGOUT_USER });
-    removeUserFromLocalStorage();
+    // removeUserFromLocalStorage();
   };
 
   const updateUser = async (currentUser) => {
@@ -225,14 +221,14 @@ const AppProvider = ({ children }) => {
     try {
       const { data } = await authFetch.patch('/auth/updateUser', currentUser);
 
-      const { user, token, location } = data;
+      const { user, location } = data;
 
       dispatch({
         type: UPDATE_USER_SUCCESS,
-        payload: { user, token, location },
+        payload: { user, location },
       });
 
-      addUserToLocalStorage({ user, token, location });
+      // addUserToLocalStorage({ user, token, location });
     } catch (error) {
       if (error.response.status !== 401) {
         dispatch({

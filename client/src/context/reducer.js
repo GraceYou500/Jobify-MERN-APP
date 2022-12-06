@@ -69,7 +69,6 @@ const reducer = (state, action) => {
       alertText: 'Register successfully! Redirecting...',
       alertType: 'success',
       user: action.payload.user,
-      token: action.payload.token,
       userLocation: action.payload.location,
       jobLocation: action.payload.location,
     };
@@ -100,7 +99,6 @@ const reducer = (state, action) => {
       alertText: 'Login successfully! Redirecting...',
       alertType: 'success',
       user: action.payload.user,
-      token: action.payload.token,
       userLocation: action.payload.location,
       jobLocation: action.payload.location,
     };
@@ -131,7 +129,6 @@ const reducer = (state, action) => {
       alertText: action.payload.alertText,
       alertType: 'success',
       user: action.payload.user,
-      token: action.payload.token,
       userLocation: action.payload.location,
       jobLocation: action.payload.location,
     };
@@ -158,7 +155,6 @@ const reducer = (state, action) => {
     return {
       ...initialState,
       user: null,
-      token: null,
       userLocation: '',
       jobLocation: '',
     };
@@ -179,7 +175,6 @@ const reducer = (state, action) => {
       alertText: 'User Profile Updated!',
       alertType: 'success',
       user: action.payload.user,
-      token: action.payload.token,
       userLocation: action.payload.location,
       jobLocation: action.payload.location,
     };
