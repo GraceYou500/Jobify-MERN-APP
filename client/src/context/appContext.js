@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer, useContext, useEffect } from 'react';
 import reducer from './reducer';
 import axios from 'axios';
 import {
@@ -35,9 +35,12 @@ import {
   CLEAR_FILTERS,
   CHANGE_PAGE,
   DELETE_JOB_ERROR,
+  GET_CURRENT_USER_BEGIN,
+  GET_CURRENT_USER_SUCCESS,
 } from './actions';
 
 const initialState = {
+  userLoading: true,
   isLoading: false,
   showAlert: false,
   showSidebar: false,
@@ -372,6 +375,25 @@ const AppProvider = ({ children }) => {
   const changePage = (page) => {
     dispatch({ type: CHANGE_PAGE, payload: { page } });
   };
+
+  const getCurrentUser = async () => {
+    dispatch({ type: GET_CURRENT_USER_BEGIN });
+
+    try {
+      const { data } = await authFetch('/auth/getCurrentUser');
+      dispatch({
+        type: GET_CURRENT_USER_SUCCESS,
+        payload: { user: data.user, location: data.location },
+      });
+    } catch (error) {
+      if (error.response.status === 401) return;
+      logoutUser();
+    }
+  };
+
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
 
   return (
     <AppContext.Provider
