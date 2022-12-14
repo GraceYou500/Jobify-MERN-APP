@@ -24,6 +24,18 @@ const links = [
   },
   {
     id: 4,
+    text: 'all applications',
+    path: 'all-applications',
+    icon: <MdQueryStats />,
+  },
+  {
+    id: 5,
+    text: 'add application',
+    path: 'add-application',
+    icon: <FaWpforms />,
+  },
+  {
+    id: 6,
     text: 'profile',
     path: 'profile',
     icon: <ImProfile />,

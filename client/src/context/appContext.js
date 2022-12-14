@@ -37,6 +37,9 @@ import {
   DELETE_JOB_ERROR,
   GET_CURRENT_USER_BEGIN,
   GET_CURRENT_USER_SUCCESS,
+  ADD_SKILL,
+  CHANGE_SKILL,
+  DELETE_SKILL,
 } from './actions';
 
 const initialState = {
@@ -69,6 +72,13 @@ const initialState = {
   searchType: 'all',
   sort: 'latest',
   sortOptions: ['latest', 'oldest', 'a-z', 'z-a'],
+
+  applicantFirstName: '',
+  applicantLastName: '',
+  applicantEmail: '',
+  applicantPosition: '',
+  applicantSkillsList: [''],
+  applicantDescription: '',
 };
 
 const AppContext = React.createContext();
@@ -246,6 +256,7 @@ const AppProvider = ({ children }) => {
   };
 
   const handleChange = ({ name, value }) => {
+    console.log(name, value);
     dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
   };
 
@@ -392,6 +403,39 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  const addSkill = () => {
+    dispatch({ type: ADD_SKILL });
+  };
+
+  const changeSkill = ({ skillValue, index }) => {
+    dispatch({ type: CHANGE_SKILL, payload: { skillValue, index } });
+  };
+
+  const deleteSkill = ({ index }) => {
+    dispatch({ type: DELETE_SKILL, payload: { index } });
+  };
+
+  const createApplication = () => {
+    const {
+      applicantFirstName,
+      applicantLastName,
+      applicantEmail,
+      applicantPosition,
+      applicantDescription,
+      applicantSkillsList,
+    } = state;
+
+    console.log(
+      'createApplication-skillsList',
+      applicantFirstName,
+      applicantLastName,
+      applicantEmail,
+      applicantPosition,
+      applicantSkillsList,
+      applicantDescription
+    );
+  };
+
   useEffect(() => {
     getCurrentUser();
   }, []);
@@ -417,6 +461,10 @@ const AppProvider = ({ children }) => {
         showStats,
         clearFilters,
         changePage,
+        createApplication,
+        changeSkill,
+        addSkill,
+        deleteSkill,
       }}
     >
       {children}

@@ -48,3 +48,11 @@ export const CHANGE_PAGE = 'CHANGE_PAGE';
 
 export const GET_CURRENT_USER_BEGIN = 'GET_CURRENT_USER_BEGIN';
 export const GET_CURRENT_USER_SUCCESS = 'GET_CURRENT_USER_SUCCESS';
+
+export const ADD_SKILLS = 'ADD_SKILLS';
+
+export const ADD_SKILL = 'ADD_SKILL';
+
+export const CHANGE_SKILL = 'CHANGE_SKILL';
+
+export const DELETE_SKILL = 'DELETE_SKILL';

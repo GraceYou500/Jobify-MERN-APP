@@ -13,9 +13,10 @@ import Loading from './Loading';
 import StatsContainer from './StatsContainer';
 import ChartsContainer from './ChartsContainer';
 import PageBtnContainer from './PageBtnContainer';
-
+import SkillInput from './SkillInput';
 export {
   PageBtnContainer,
+  SkillInput,
   ChartsContainer,
   StatsContainer,
   Loading,

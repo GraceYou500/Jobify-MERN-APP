@@ -5,6 +5,8 @@ import {
   Stats,
   Profile,
   AddJob,
+  AddApplication,
+  AllApplications,
 } from './pages/dashboard';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -25,6 +27,8 @@ function App() {
           <Route path='all-jobs' element={<AllJobs />} />
           <Route path='profile' element={<Profile />} />
           <Route path='add-job' element={<AddJob />} />
+          <Route path='add-application' element={<AddApplication />} />
+          <Route path='all-applications' element={<AllApplications />} />
         </Route>
         <Route path='/register' element={<Register />} />
         <Route path='/landing' element={<Landing />} />

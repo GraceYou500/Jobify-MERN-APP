@@ -34,6 +34,10 @@ import {
   DELETE_JOB_ERROR,
   GET_CURRENT_USER_BEGIN,
   GET_CURRENT_USER_SUCCESS,
+  ADD_SKILLS,
+  ADD_SKILL,
+  CHANGE_SKILL,
+  DELETE_SKILL,
 } from './actions';
 import { initialState } from './appContext';
 
@@ -195,6 +199,51 @@ const reducer = (state, action) => {
       ...state,
       page: 1,
       [action.payload.name]: action.payload.value,
+    };
+  }
+
+  if (action.type === ADD_SKILLS) {
+    return {
+      ...state,
+      applicantSkillsList: action.payload.skillsList,
+    };
+  }
+
+  if (action.type === ADD_SKILL) {
+    return {
+      ...state,
+      applicantSkillsList: [...state.applicantSkillsList, ''],
+    };
+  }
+
+  if (action.type === CHANGE_SKILL) {
+    // state.applicantSkillsList[action.payload.index] = action.payload.skillValue;
+    const newArr = [
+      ...state.applicantSkillsList.slice(0, action.payload.index),
+      action.payload.skillValue,
+      ...state.applicantSkillsList.slice(
+        action.payload.index + 1,
+        state.applicantSkillsList.length
+      ),
+    ];
+    return {
+      ...state,
+      applicantSkillsList: newArr,
+    };
+  }
+
+  if (action.type === DELETE_SKILL) {
+    // state.applicantSkillsList[action.payload.index] = action.payload.skillValue;
+    const newArr = [
+      ...state.applicantSkillsList.slice(0, action.payload.index),
+      ...state.applicantSkillsList.slice(
+        action.payload.index + 1,
+        state.applicantSkillsList.length
+      ),
+    ];
+    return {
+      ...state,
+      applicantSkillsList: newArr,
     };
   }
 
