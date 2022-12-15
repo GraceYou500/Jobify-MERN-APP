@@ -42,6 +42,8 @@ import {
   CHANGE_SKILL,
   DELETE_SKILL,
   GET_APPLICATIONS,
+  DELETE_APPLICATION,
+  SET_EDIT_APPLICATION,
 } from './actions';
 
 const initialState = {
@@ -55,6 +57,7 @@ const initialState = {
 
   userLocation: '',
   isEditing: false,
+  idEditingApp: false,
   editJobId: '',
   position: '',
   company: '',
@@ -444,6 +447,14 @@ const AppProvider = ({ children }) => {
     dispatch({ type: GET_APPLICATIONS, payload: { applications: data } });
   };
 
+  const deleteApplication = async (id) => {
+    dispatch({ type: DELETE_APPLICATION, payload: { id } });
+  };
+
+  const setEditApplication = (id) => {
+    dispatch({ type: SET_EDIT_APPLICATION, payload: { id } });
+  };
+
   useEffect(() => {
     getCurrentUser();
   }, []);
@@ -474,6 +485,8 @@ const AppProvider = ({ children }) => {
         addSkill,
         deleteSkill,
         getApplications,
+        deleteApplication,
+        setEditApplication,
       }}
     >
       {children}

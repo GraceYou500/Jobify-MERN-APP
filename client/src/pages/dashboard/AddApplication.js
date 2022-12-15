@@ -15,7 +15,7 @@ const AddApplication = () => {
     showAlert,
     displayAlert,
     createApplication,
-
+    idEditingApp,
     addSkill,
     changeSkill,
     applicantSkillsList,
@@ -81,7 +81,7 @@ const AddApplication = () => {
   return (
     <Wrapper>
       <form onSubmit={submitHandler}>
-        <h3>Add Application</h3>
+        <h3>{idEditingApp ? 'Edit' : 'Add'} Application</h3>
         {showAlert && <Alert />}
         <div className='form-container'>
           <div className='form-center'>
@@ -117,14 +117,6 @@ const AddApplication = () => {
           <div>
             <label className='form-label'>Skills</label>
             <div className='form-skill'>
-              {/* <FormRow
-                name='applicantSkill'
-                type='text'
-                value={applicantSkill}
-                handleChange={handleInputChange}
-                labelText='Skills'
-              /> */}
-
               {applicantSkillsList.map((item, index) => {
                 return (
                   <SkillInput

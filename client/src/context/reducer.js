@@ -39,6 +39,8 @@ import {
   CHANGE_SKILL,
   DELETE_SKILL,
   GET_APPLICATIONS,
+  DELETE_APPLICATION,
+  SET_EDIT_APPLICATION,
 } from './actions';
 import { initialState } from './appContext';
 
@@ -424,6 +426,34 @@ const reducer = (state, action) => {
     return {
       ...state,
       applications: action.payload.applications,
+    };
+  }
+
+  if (action.type === DELETE_APPLICATION) {
+    const newApps = state.applications.filter(
+      (item) => item.id !== action.payload.id
+    );
+    return {
+      ...state,
+      applications: newApps,
+    };
+  }
+
+  if (action.type === SET_EDIT_APPLICATION) {
+    const app = state.applications.find(
+      (item) => item.id === action.payload.id
+    );
+    const { firstName, lastName, position, email, skills, description } = app;
+
+    return {
+      ...state,
+      idEditingApp: true,
+      applicantFirstName: firstName,
+      applicantLastName: lastName,
+      applicantEmail: email,
+      applicantPosition: position,
+      applicantSkillsList: skills,
+      applicantDescription: description,
     };
   }
 
