@@ -38,6 +38,7 @@ import {
   ADD_SKILL,
   CHANGE_SKILL,
   DELETE_SKILL,
+  GET_APPLICATIONS,
 } from './actions';
 import { initialState } from './appContext';
 
@@ -416,6 +417,13 @@ const reducer = (state, action) => {
       user: action.payload.user,
       userLocation: action.payload.location,
       jobLocation: action.payload.location,
+    };
+  }
+
+  if (action.type === GET_APPLICATIONS) {
+    return {
+      ...state,
+      applications: action.payload.applications,
     };
   }
 

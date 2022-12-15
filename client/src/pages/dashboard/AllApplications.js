@@ -1,9 +1,11 @@
 import React from 'react';
+import { SearchBox, ApplicantContainer } from '../../components';
 
 const AllApplications = () => {
   return (
     <div>
-      <h2>All Applications</h2>
+      <SearchBox />
+      <ApplicantContainer />
     </div>
   );
 };

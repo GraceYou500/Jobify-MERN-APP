@@ -1,6 +1,7 @@
 import React, { useReducer, useContext, useEffect } from 'react';
 import reducer from './reducer';
 import axios from 'axios';
+import applicationList from '../utils/applicationList';
 import {
   DISPLAY_ALERT,
   CLEAR_ALERT,
@@ -40,6 +41,7 @@ import {
   ADD_SKILL,
   CHANGE_SKILL,
   DELETE_SKILL,
+  GET_APPLICATIONS,
 } from './actions';
 
 const initialState = {
@@ -79,6 +81,7 @@ const initialState = {
   applicantPosition: '',
   applicantSkillsList: [''],
   applicantDescription: '',
+  applications: [],
 };
 
 const AppContext = React.createContext();
@@ -436,6 +439,11 @@ const AppProvider = ({ children }) => {
     );
   };
 
+  const getApplications = async () => {
+    const data = applicationList;
+    dispatch({ type: GET_APPLICATIONS, payload: { applications: data } });
+  };
+
   useEffect(() => {
     getCurrentUser();
   }, []);
@@ -465,6 +473,7 @@ const AppProvider = ({ children }) => {
         changeSkill,
         addSkill,
         deleteSkill,
+        getApplications,
       }}
     >
       {children}

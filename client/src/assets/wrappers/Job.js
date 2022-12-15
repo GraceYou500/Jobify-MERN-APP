@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const Wrapper = styled.article`
   background: var(--white);
@@ -56,6 +56,34 @@ const Wrapper = styled.article`
   .content {
     padding: 1rem 1.5rem;
   }
+
+  .java {
+    background: #fcefc7;
+    color: #e9b949;
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    border-radius: var(--borderRadius);
+  }
+
+  .js {
+    background: #e0e8f9;
+    color: #647acb;
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    border-radius: var(--borderRadius);
+  }
+
+  .react {
+    color: #d66a6a;
+    background: #ffeeee;
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    border-radius: var(--borderRadius);
+  }
+
   .content-center {
     display: grid;
     grid-template-columns: 1fr;
@@ -69,6 +97,11 @@ const Wrapper = styled.article`
     @media (min-width: 1120px) {
       grid-template-columns: 1fr 1fr;
     }
+  }
+
+  .content-skills {
+    display: flex;
+    column-gap: 0.5rem;
   }
 
   .status {
@@ -100,6 +133,6 @@ const Wrapper = styled.article`
   &:hover .actions {
     visibility: visible;
   }
-`
+`;
 
-export default Wrapper
+export default Wrapper;

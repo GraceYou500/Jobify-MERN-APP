@@ -1,0 +1,60 @@
+const applicationList = [
+  {
+    firstName: 'Mia',
+    lastName: 'Princess',
+    position: 'home alert',
+    email: 'mia@163.com',
+    createdAt: 'Dec 15th 2022',
+    skills: ['eat', 'sleep', 'play', 'miaomiao'],
+  },
+  {
+    firstName: 'Grace',
+    lastName: 'You',
+    position: 'front end',
+    email: 'grace@163.com',
+    createdAt: 'Dec 13th 2022',
+    skills: ['HTML', 'CSS', 'JaveScript', 'React'],
+  },
+  {
+    firstName: 'Carl',
+    lastName: 'Li',
+    position: 'back end',
+    email: 'carl@gmail.com',
+    createdAt: 'Dec 14th 2022',
+    skills: ['Java', 'JavaScript', 'React', 'CSS', 'HTML'],
+  },
+  {
+    firstName: 'Doggy',
+    lastName: 'Liu',
+    position: 'home alert',
+    email: 'doggy@163.com',
+    createdAt: 'Dec 15th 2022',
+    skills: ['eat', 'sleep', 'play', 'wangwang'],
+  },
+  {
+    firstName: 'Rabit',
+    lastName: 'Ren',
+    position: 'Cute',
+    email: 'rabit@163.com',
+    createdAt: 'Dec 10th 2022',
+    skills: ['eat', 'sleep', 'play', 'renren'],
+  },
+  {
+    firstName: 'Sheep',
+    lastName: 'Liu',
+    position: 'skin',
+    email: 'sheep@163.com',
+    createdAt: 'Dec 17th 2022',
+    skills: ['eat', 'sleep', 'hair', 'milk'],
+  },
+  {
+    firstName: 'cow',
+    lastName: 'zhang',
+    position: 'milk',
+    email: 'cow@163.com',
+    createdAt: 'Dec 8th 2022',
+    skills: ['eat', 'sleep', 'momo', 'milk'],
+  },
+];
+
+export default applicationList;

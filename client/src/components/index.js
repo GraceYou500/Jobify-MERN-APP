@@ -14,7 +14,14 @@ import StatsContainer from './StatsContainer';
 import ChartsContainer from './ChartsContainer';
 import PageBtnContainer from './PageBtnContainer';
 import SkillInput from './SkillInput';
+import Applicant from './Applicant';
+import ApplicantContainer from './ApplicantContainer';
+import SearchBox from './SearchBox';
+
 export {
+  SearchBox,
+  ApplicantContainer,
+  Applicant,
   PageBtnContainer,
   SkillInput,
   ChartsContainer,
