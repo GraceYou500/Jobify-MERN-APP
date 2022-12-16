@@ -38,5 +38,10 @@ const Wrapper = styled.section`
     height: 30px;
     border-radius: var(--borderRadius);
   }
+
+  .actived {
+    color: #d66a6a;
+    background: #ffeeee;
+  }
 `;
 export default Wrapper;

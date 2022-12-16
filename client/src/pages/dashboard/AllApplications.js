@@ -1,20 +1,28 @@
 import React from 'react';
 import { SearchBox, ApplicantContainer } from '../../components';
+import applicationList from '../../utils/applicationList';
 
 const AllApplications = () => {
-  const apps = [
-    { id: '1', skills: ['Java', 'JavaScript', 'React', 'CSS', 'HTML'] },
-    { id: '2', skills: ['HTML', 'CSS', 'JaveScript', 'React'] },
-    { id: '3', skills: ['CSS', 'React', 'Java'] },
-    { id: '4', skills: ['HTML', 'JaveScript', 'React'] },
-    { id: '5', skills: ['HTML', 'CSS', 'React'] },
-  ];
 
-  const newApps = apps.filter((item) =>
-    item.skills.includes('Java' || 'React')
-  );
+  const abc = ["a","g","p","q","o"];
+  const selected = ["o","q","a"];
+  const selected2 = ["a", "b","c"];
+ 
+  const isSelected = (origList, seleList) => {
+    for (let ele of seleList) {
+     if(!origList.includes(ele)) {
+       return false;
+       } 
 
-  console.log('newApps/.....', newApps);
+    }
+  return true;
+  };
+
+ console.log("selectedChecke",isSelected(abc, selected)); 
+ console.log("selectedChecke",isSelected(abc, selected2)); 
+ 
+//  applicationList.filter(applicant => isSelected(applicant.skills, selectedSkiils))
+
   return (
     <div>
       <SearchBox />

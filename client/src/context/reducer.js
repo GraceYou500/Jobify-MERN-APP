@@ -47,6 +47,8 @@ import {
   CANCEL_JAVASCRIPT,
   SEARCH_REACT,
   CANCEL_REACT,
+  SET_ALL_SKILLS,
+  TOGGLE_SELECTED_SKILLS,
 } from './actions';
 import { initialState } from './appContext';
 
@@ -470,44 +472,29 @@ const reducer = (state, action) => {
     };
   }
 
-  if (action.type === SEARCH_JAVA) {
+  if (action.type === SET_ALL_SKILLS) {
     return {
       ...state,
-      searchJava: action.payload.java,
-    };
-  }
-  if (action.type === CANCEL_JAVA) {
-    return {
-      ...state,
-      searchJava: '',
+      allSkills: action.payload.extractSkills,
     };
   }
 
-  if (action.type === SEARCH_JAVASCRIPT) {
+  if (action.type === TOGGLE_SELECTED_SKILLS) {
+    // console.log("TOGGLE_SELECTED_SKILLS..", action.payload.skill);
+    let newSelectedSkills = [];
+    if (state.selectedSkills.includes(action.payload.skill)) {
+      newSelectedSkills = state.selectedSkills.filter(skill => ( skill !== action.payload.skill ))
+    } else {
+      newSelectedSkills = [...state.selectedSkills, action.payload.skill];
+    }
+
     return {
       ...state,
-      searchJavaScript: action.payload.javaScript,
-    };
-  }
-  if (action.type === CANCEL_JAVASCRIPT) {
-    return {
-      ...state,
-      searchJavaScript: '',
+      selectedSkills:newSelectedSkills,
     };
   }
 
-  if (action.type === SEARCH_REACT) {
-    return {
-      ...state,
-      searchReact: action.payload.react,
-    };
-  }
-  if (action.type === CANCEL_REACT) {
-    return {
-      ...state,
-      searchReact: '',
-    };
-  }
+  
 
   throw new Error(`no such action: ${action.type}`);
 };
