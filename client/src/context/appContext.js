@@ -44,6 +44,12 @@ import {
   GET_APPLICATIONS,
   DELETE_APPLICATION,
   SET_EDIT_APPLICATION,
+  SEARCH_JAVA,
+  CANCEL_JAVA,
+  SEARCH_JAVASCRIPT,
+  CANCEL_JAVASCRIPT,
+  SEARCH_REACT,
+  CANCEL_REACT,
 } from './actions';
 
 const initialState = {
@@ -85,6 +91,9 @@ const initialState = {
   applicantSkillsList: [''],
   applicantDescription: '',
   applications: [],
+  searchJava: '',
+  searchJavaScript: '',
+  searchReact: '',
 };
 
 const AppContext = React.createContext();
@@ -444,6 +453,8 @@ const AppProvider = ({ children }) => {
 
   const getApplications = async () => {
     const data = applicationList;
+    const { searchJava, searchJavaScript, searchReact } = state;
+
     dispatch({ type: GET_APPLICATIONS, payload: { applications: data } });
   };
 
@@ -453,6 +464,38 @@ const AppProvider = ({ children }) => {
 
   const setEditApplication = (id) => {
     dispatch({ type: SET_EDIT_APPLICATION, payload: { id } });
+  };
+
+  const searchJavaApp = (java) => {
+    dispatch({ type: SEARCH_JAVA, payload: { java } });
+    console.log('searchJavaApp', java);
+  };
+
+  const cancelJava = () => {
+    dispatch({ type: CANCEL_JAVA });
+    console.log('cancelJava');
+  };
+
+  const searchJsApp = (javaScript) => {
+    dispatch({ type: SEARCH_JAVASCRIPT, payload: { javaScript } });
+    console.log('searchJavaApp', javaScript);
+  };
+
+  const cancelJs = () => {
+    dispatch({ type: CANCEL_JAVASCRIPT });
+    console.log('cancelJavaScript');
+  };
+
+  const searchReactApp = (react) => {
+    dispatch({ type: SEARCH_REACT, payload: { react } });
+    console.log('searchJavaApp', react);
+    const condition = [state.searchJava, state.searchJavaScript];
+    console.log('condition.....', condition);
+  };
+
+  const cancelReact = () => {
+    dispatch({ type: CANCEL_REACT });
+    console.log('cancelReact');
   };
 
   useEffect(() => {
@@ -487,6 +530,12 @@ const AppProvider = ({ children }) => {
         getApplications,
         deleteApplication,
         setEditApplication,
+        searchJavaApp,
+        cancelJava,
+        searchJsApp,
+        cancelJs,
+        searchReactApp,
+        cancelReact,
       }}
     >
       {children}

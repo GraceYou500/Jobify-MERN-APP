@@ -41,6 +41,12 @@ import {
   GET_APPLICATIONS,
   DELETE_APPLICATION,
   SET_EDIT_APPLICATION,
+  SEARCH_JAVA,
+  CANCEL_JAVA,
+  SEARCH_JAVASCRIPT,
+  CANCEL_JAVASCRIPT,
+  SEARCH_REACT,
+  CANCEL_REACT,
 } from './actions';
 import { initialState } from './appContext';
 
@@ -259,6 +265,13 @@ const reducer = (state, action) => {
       jobLocation: state.userLocation,
       jobType: 'full-time',
       status: 'pending',
+      idEditingApp: false,
+      applicantFirstName: '',
+      applicantLastName: '',
+      applicantEmail: '',
+      applicantPosition: '',
+      applicantSkillsList: [''],
+      applicantDescription: '',
     };
     return {
       ...state,
@@ -454,6 +467,45 @@ const reducer = (state, action) => {
       applicantPosition: position,
       applicantSkillsList: skills,
       applicantDescription: description,
+    };
+  }
+
+  if (action.type === SEARCH_JAVA) {
+    return {
+      ...state,
+      searchJava: action.payload.java,
+    };
+  }
+  if (action.type === CANCEL_JAVA) {
+    return {
+      ...state,
+      searchJava: '',
+    };
+  }
+
+  if (action.type === SEARCH_JAVASCRIPT) {
+    return {
+      ...state,
+      searchJavaScript: action.payload.javaScript,
+    };
+  }
+  if (action.type === CANCEL_JAVASCRIPT) {
+    return {
+      ...state,
+      searchJavaScript: '',
+    };
+  }
+
+  if (action.type === SEARCH_REACT) {
+    return {
+      ...state,
+      searchReact: action.payload.react,
+    };
+  }
+  if (action.type === CANCEL_REACT) {
+    return {
+      ...state,
+      searchReact: '',
     };
   }
 

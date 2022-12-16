@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import Wrapper from '../../assets/wrappers/ApplicationFormPage';
 import { FormRow, Alert, SkillInput } from '../../components';
 import { useAppContext } from '../../context/appContext';
@@ -20,9 +19,12 @@ const AddApplication = () => {
     changeSkill,
     applicantSkillsList,
     deleteSkill,
+    clearValues,
   } = useAppContext();
 
   // const [skills, setskills] = useState(['']);
+
+  const navigate = useNavigate();
 
   const addSkillHandler = (e) => {
     e.preventDefault();
@@ -76,6 +78,12 @@ const AddApplication = () => {
     }
 
     createApplication();
+  };
+
+  const backToAllHandle = (e) => {
+    e.preventDefault();
+    clearValues();
+    navigate('/all-applications');
   };
 
   return (
@@ -146,7 +154,12 @@ const AddApplication = () => {
             <button className='btn btn-block submit-btn' type='submit'>
               Submit
             </button>
-            <button className='btn btn-block clear-btn'>Back</button>
+            <button
+              className='btn btn-block clear-btn'
+              onClick={backToAllHandle}
+            >
+              Back
+            </button>
           </div>
         </div>
       </form>

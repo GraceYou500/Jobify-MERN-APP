@@ -1,3 +1,5 @@
+import { IoExtensionPuzzleOutline } from 'react-icons/io5';
+
 export const DISPLAY_ALERT = 'SHOW_ALERT';
 export const CLEAR_ALERT = 'CLEAR_ALERT';
 
@@ -57,3 +59,12 @@ export const DELETE_SKILL = 'DELETE_SKILL';
 export const GET_APPLICATIONS = 'GET_APPLICATIONS';
 export const DELETE_APPLICATION = 'DELETE_APPLICATION';
 export const SET_EDIT_APPLICATION = 'SET_EDIT_APPLICATION';
+
+export const SEARCH_JAVA = 'SEARCH_JAVA';
+export const CANCEL_JAVA = 'CANCEL_JAVA';
+
+export const SEARCH_JAVASCRIPT = 'SEARCH_JAVASCRIPT';
+export const CANCEL_JAVASCRIPT = 'CANCEL_JAVASCRIPT';
+
+export const SEARCH_REACT = 'SEARCH_REACT';
+export const CANCEL_REACT = 'CANCEL_REACT';
