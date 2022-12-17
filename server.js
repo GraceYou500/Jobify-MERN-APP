@@ -21,7 +21,7 @@ import connectDB from './db/connect.js'; // make sure connectDB is above middlew
 // routers
 import authRouter from './routes/authRoutes.js';
 import jobRouter from './routes/jobRoutes.js';
-
+import applicantRouter from './routes/applicantRoutes.js';
 // middleware
 import notFoundMiddleware from './middleware/not-found.js';
 import errorHandlerMiddleware from './middleware/error-handler.js';
@@ -52,6 +52,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/jobs', authenticateUser, jobRouter);
+app.use('/api/v1/applicants', authenticateUser, applicantRouter);
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
