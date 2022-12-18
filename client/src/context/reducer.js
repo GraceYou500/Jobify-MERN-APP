@@ -38,19 +38,16 @@ import {
   ADD_SKILL,
   CHANGE_SKILL,
   DELETE_SKILL,
-  GET_APPLICATIONS,
   DELETE_APPLICATION,
   SET_EDIT_APPLICATION,
-  SEARCH_JAVA,
-  CANCEL_JAVA,
-  SEARCH_JAVASCRIPT,
-  CANCEL_JAVASCRIPT,
-  SEARCH_REACT,
-  CANCEL_REACT,
   SET_ALL_SKILLS,
   TOGGLE_SELECTED_SKILLS,
+  SET_APPLICATIONS_BEGIN,
+  SET_APPLICATIONS_SUCCESS,
 } from './actions';
 import { initialState } from './appContext';
+
+
 
 const reducer = (state, action) => {
   if (action.type === DISPLAY_ALERT) {
@@ -437,10 +434,18 @@ const reducer = (state, action) => {
     };
   }
 
-  if (action.type === GET_APPLICATIONS) {
+  if (action.type === SET_APPLICATIONS_SUCCESS) {
+
+    // let selectedApplications=[];
+    // if(state.selectedSkills.length === 0) {      
+    //   selectedApplications = action.payload.applications;
+    // } else {
+    //   selectedApplications = state.applications.filter((application) => isSelected(state.selectedSkills, application.skills))
+    // }
+
     return {
       ...state,
-      applications: action.payload.applications,
+      applications:action.payload.applications,
     };
   }
 
@@ -494,7 +499,14 @@ const reducer = (state, action) => {
     };
   }
 
-  
+
+
+  // if(action.type === SELECTED_SKILLS) {
+  //   return {
+  //     ...state,
+  //     applications: selectedApplications,
+  //   }
+  // }
 
   throw new Error(`no such action: ${action.type}`);
 };

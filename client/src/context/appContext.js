@@ -41,11 +41,13 @@ import {
   ADD_SKILL,
   CHANGE_SKILL,
   DELETE_SKILL,
-  GET_APPLICATIONS,
+  SET_APPLICATIONS_BEGIN,
+  SET_APPLICATIONS_SUCCESS,
   DELETE_APPLICATION,
   SET_EDIT_APPLICATION,
   SET_ALL_SKILLS,
   TOGGLE_SELECTED_SKILLS,
+
 } from './actions';
 
 const initialState = {
@@ -446,13 +448,12 @@ const AppProvider = ({ children }) => {
   };
 
   const getApplications = async () => {
-    const data = applicationList;
-  
+
+    const data = applicationList; // badck
+    dispatch({ type: SET_APPLICATIONS_SUCCESS, payload: { applications: data } });
+
     const extractSkills = extractAllApplicantSkills(data);
-    dispatch({type: SET_ALL_SKILLS, payload: { extractSkills }});
-
-    dispatch({ type: GET_APPLICATIONS, payload: { applications: data } });
-
+    dispatch({type: SET_ALL_SKILLS, payload: { extractSkills }}); // for all skills buttons
   };
 
   const deleteApplication = async (id) => {
@@ -480,11 +481,15 @@ const AppProvider = ({ children }) => {
 
   const toggleSelectedSkills = (skill) => {
     dispatch({type: TOGGLE_SELECTED_SKILLS, payload: { skill }})
+    // dispatch({type: SELECTED_SKILLS})
 
   };
 
+  
+
   useEffect(() => {
     getCurrentUser();
+   
   }, []);
 
   return (
