@@ -79,7 +79,6 @@ const initialState = {
   searchType: 'all',
   sort: 'latest',
   sortOptions: ['latest', 'oldest', 'a-z', 'z-a'],
-
   applicantFirstName: '',
   applicantLastName: '',
   applicantEmail: '',
@@ -448,12 +447,12 @@ const AppProvider = ({ children }) => {
 
   const getApplications = async () => {
     const data = applicationList;
-    const { searchJava, searchJavaScript, searchReact } = state;
+  
+    const extractSkills = extractAllApplicantSkills(data);
+    dispatch({type: SET_ALL_SKILLS, payload: { extractSkills }});
 
     dispatch({ type: GET_APPLICATIONS, payload: { applications: data } });
 
-    const extractSkills = extractAllApplicantSkills(data);
-    dispatch({type: SET_ALL_SKILLS, payload: { extractSkills }});
   };
 
   const deleteApplication = async (id) => {
