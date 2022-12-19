@@ -44,6 +44,13 @@ import {
   TOGGLE_SELECTED_SKILLS,
   SET_APPLICATIONS_BEGIN,
   SET_APPLICATIONS_SUCCESS,
+  SET_APPLICATIONS_ERROR,
+  CREATE_APPLICANTS_BEGIN,
+  CREATE_APPLICANTS_SUCCESS,
+  CREATE_APPLICANTS_ERROR,
+  EDIT_APPLICANT_BEGIN,
+  EDIT_APPLICANT_SUCCESS,
+  EDIT_APPLICANT_ERROR,
 } from './actions';
 import { initialState } from './appContext';
 
@@ -434,6 +441,14 @@ const reducer = (state, action) => {
     };
   }
 
+  if (action.type === SET_APPLICATIONS_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+      showAlert: false,
+    }
+  }
+
   if (action.type === SET_APPLICATIONS_SUCCESS) {
 
     // let selectedApplications=[];
@@ -445,13 +460,53 @@ const reducer = (state, action) => {
 
     return {
       ...state,
+      isLoading: false,
       applications:action.payload.applications,
     };
   }
 
+  
+  if (action.type === SET_APPLICATIONS_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertText: action.payload.msg,
+      alertType: 'danger',
+    };
+  }
+
+  if(action.type === CREATE_APPLICANTS_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+      showAlert: false,
+    }
+  }
+  
+  if (action.type === CREATE_APPLICANTS_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertText: 'Create applicant successfully!',
+      alertType: 'success',
+    }
+  }
+
+  if (action.type === CREATE_APPLICANTS_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertText: action.payload.msg,
+      alertType: 'danger',
+    }
+  }
+
   if (action.type === DELETE_APPLICATION) {
     const newApps = state.applications.filter(
-      (item) => item.id !== action.payload.id
+      (item) => item._id !== action.payload.id
     );
     return {
       ...state,
@@ -460,14 +515,15 @@ const reducer = (state, action) => {
   }
 
   if (action.type === SET_EDIT_APPLICATION) {
-    const app = state.applications.find(
-      (item) => item.id === action.payload.id
+    const applicant = state.applications.find(
+      (item) => item._id === action.payload.id
     );
-    const { firstName, lastName, position, email, skills, description } = app;
+    const { firstName, lastName, position, email, skills, description } = applicant;
 
     return {
       ...state,
       idEditingApp: true,
+      eidtApplicantId:action.payload.id,
       applicantFirstName: firstName,
       applicantLastName: lastName,
       applicantEmail: email,
@@ -499,14 +555,24 @@ const reducer = (state, action) => {
     };
   }
 
+  if (action.type === EDIT_APPLICANT_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+      showAlert: false,
+    }
+  }
 
+  if (action.type === EDIT_APPLICANT_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertText: 'Update applicant successfully!',
+      alertType: 'success',
 
-  // if(action.type === SELECTED_SKILLS) {
-  //   return {
-  //     ...state,
-  //     applications: selectedApplications,
-  //   }
-  // }
+    }
+  }
 
   throw new Error(`no such action: ${action.type}`);
 };

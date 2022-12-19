@@ -47,7 +47,13 @@ import {
   SET_EDIT_APPLICATION,
   SET_ALL_SKILLS,
   TOGGLE_SELECTED_SKILLS,
-
+  SET_APPLICATIONS_ERROR,
+  CREATE_APPLICANTS_BEGIN,
+  CREATE_APPLICANTS_SUCCESS,
+  CREATE_APPLICANTS_ERROR,
+  EDIT_APPLICANT_BEGIN,
+  EDIT_APPLICANT_SUCCESS,
+  EDIT_APPLICANT_ERROR,
 } from './actions';
 
 const initialState = {
@@ -90,6 +96,7 @@ const initialState = {
   applications: [],
   allSkills:[],
   selectedSkills:[],
+  eidtApplicantId:"",
 };
 
 const AppContext = React.createContext();
@@ -426,35 +433,56 @@ const AppProvider = ({ children }) => {
     dispatch({ type: DELETE_SKILL, payload: { index } });
   };
 
-  const createApplication = () => {
-    const {
-      applicantFirstName,
-      applicantLastName,
-      applicantEmail,
-      applicantPosition,
-      applicantDescription,
-      applicantSkillsList,
-    } = state;
-
-    console.log(
-      'createApplication-skillsList',
-      applicantFirstName,
-      applicantLastName,
-      applicantEmail,
-      applicantPosition,
-      applicantSkillsList,
-      applicantDescription
-    );
-  };
-
   const getApplications = async () => {
 
-    const data = applicationList; // badck
-    dispatch({ type: SET_APPLICATIONS_SUCCESS, payload: { applications: data } });
+    dispatch({ type: SET_APPLICATIONS_BEGIN});
 
-    const extractSkills = extractAllApplicantSkills(data);
-    dispatch({type: SET_ALL_SKILLS, payload: { extractSkills }}); // for all skills buttons
+    try {
+      const {data} = await authFetch("/applicants"); // badck
+      console.log("getApplications.....",data);
+
+      dispatch({ type: SET_APPLICATIONS_SUCCESS, payload: { applications: data.applicants } });
+      const extractSkills = extractAllApplicantSkills(data.applicants);
+      dispatch({type: SET_ALL_SKILLS, payload: { extractSkills }}); // for all skills buttons
+
+    } catch(error) {
+      dispatch({type: SET_APPLICATIONS_ERROR, payload:{ msg: error.response.data.msg}})
+    }
+  
   };
+
+  const createApplicant = async () => {
+    dispatch({ type: CREATE_APPLICANTS_BEGIN});
+    try {
+      const {
+        applicantFirstName,
+        applicantLastName,
+        applicantEmail,
+        applicantPosition,
+        applicantSkillsList,
+        applicantDescription} = state;
+      
+      await authFetch.put("/applicants", { 
+        firstName: applicantFirstName,
+        lastName: applicantLastName,
+        email: applicantEmail,
+        position:applicantPosition,
+        skills:applicantSkillsList,
+        description: applicantDescription
+      })
+
+   
+
+      dispatch({type: CREATE_APPLICANTS_SUCCESS})
+      dispatch({type: CLEAR_VALUES})
+        
+    } catch(error) {
+      if(error.response.status === 401) return;
+      dispatch({type: CREATE_APPLICANTS_ERROR})
+    }
+    clearAlert();
+  };
+
 
   const deleteApplication = async (id) => {
     dispatch({ type: DELETE_APPLICATION, payload: { id } });
@@ -462,6 +490,42 @@ const AppProvider = ({ children }) => {
 
   const setEditApplication = (id) => {
     dispatch({ type: SET_EDIT_APPLICATION, payload: { id } });
+  };
+
+  const editApplicant =async () =>{
+
+    dispatch({type: EDIT_APPLICANT_BEGIN});
+    try {
+
+      const {
+      applicantFirstName,
+      applicantLastName,
+      applicantEmail,
+      applicantPosition,
+      applicantSkillsList,
+      applicantDescription,
+      eidtApplicantId
+    } = state;
+
+    await authFetch.post("/applicants", {
+      firstName: applicantFirstName,
+      lastName: applicantLastName,
+      email: applicantEmail,
+      position:applicantPosition,
+      skills:applicantSkillsList,
+      description: applicantDescription,
+      id:eidtApplicantId
+    });
+
+    dispatch({type: EDIT_APPLICANT_SUCCESS})
+    dispatch({ type: CLEAR_VALUES });
+
+    }catch(error) {
+      if (error.response.status === 401) return;
+      dispatch({EDIT_APPLICANT_ERROR, payload:{msg: error.response.data.msg}})
+
+    }
+    clearAlert();
   };
 
   const extractAllApplicantSkills = (applicants) => {
@@ -513,7 +577,7 @@ const AppProvider = ({ children }) => {
         showStats,
         clearFilters,
         changePage,
-        createApplication,
+        createApplicant,
         changeSkill,
         addSkill,
         deleteSkill,
@@ -521,6 +585,7 @@ const AppProvider = ({ children }) => {
         deleteApplication,
         setEditApplication,    
         toggleSelectedSkills,
+        editApplicant,
       }}
     >
       {children}

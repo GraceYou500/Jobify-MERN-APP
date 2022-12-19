@@ -13,13 +13,14 @@ const AddApplication = () => {
     handleChange,
     showAlert,
     displayAlert,
-    createApplication,
+    createApplicant,
     idEditingApp,
     addSkill,
     changeSkill,
     applicantSkillsList,
     deleteSkill,
     clearValues,
+    editApplicant,
   } = useAppContext();
 
   // const [skills, setskills] = useState(['']);
@@ -77,7 +78,20 @@ const AddApplication = () => {
       return;
     }
 
-    createApplication();
+    if (idEditingApp) {
+      editApplicant();
+
+      setTimeout(()=>{
+        navigate('/all-applications');
+      },3000)
+    
+      return;
+    }
+
+    createApplicant();
+    setTimeout(()=>{
+      navigate('/all-applications');
+    },3000)
   };
 
   const backToAllHandle = (e) => {

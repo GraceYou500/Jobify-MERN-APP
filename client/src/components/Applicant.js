@@ -12,7 +12,7 @@ const Applicant = ({
   createdAt,
   position,
   skills,
-  id,
+  _id,
 }) => {
   const { deleteApplication, setEditApplication } = useAppContext();
   return (
@@ -40,13 +40,13 @@ const Applicant = ({
             <Link
               className='btn edit-btn'
               to='/add-application'
-              onClick={() => setEditApplication(id)}
+              onClick={() => setEditApplication(_id)}
             >
               Edit
             </Link>
             <button
               className='btn delete-btn'
-              onClick={() => deleteApplication(id)}
+              onClick={() => deleteApplication(_id)}
             >
               Delete
             </button>
