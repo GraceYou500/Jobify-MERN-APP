@@ -22,6 +22,8 @@ useEffect(()=>{
   
  
   useEffect(() => {
+
+    
     if(selectedSkills.length === 0) {      
      setSelectedApps(applications);
       // console.log("selectedApplications.....1", selectedApplications);

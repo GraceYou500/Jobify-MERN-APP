@@ -16,9 +16,9 @@ const getAllApplicants = async (req, res) => {
     res.status(StatusCodes.OK).json({ applicants });
 };
 
-const deleteApplicant = async (req, res) => {
-    const { id } = req.body;
-
+const deleteApplicant = async (req, res) => {   
+    const { id } = req.params;
+    console.log("deleteApplicant.....", id);
     const applicant = await Applicant.findOne({ _id: id });
 
     if (!applicant) {

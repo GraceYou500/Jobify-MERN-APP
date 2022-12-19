@@ -14,7 +14,8 @@ const Applicant = ({
   skills,
   _id,
 }) => {
-  const { deleteApplication, setEditApplication } = useAppContext();
+  const { deleteApplication, setEditApplication} = useAppContext();
+
   return (
     <Wrapper>
       <header>
@@ -46,7 +47,10 @@ const Applicant = ({
             </Link>
             <button
               className='btn delete-btn'
-              onClick={() => deleteApplication(_id)}
+              onClick={() => {
+                deleteApplication(_id);
+           
+              }}
             >
               Delete
             </button>

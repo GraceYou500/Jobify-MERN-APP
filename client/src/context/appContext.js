@@ -54,6 +54,7 @@ import {
   EDIT_APPLICANT_BEGIN,
   EDIT_APPLICANT_SUCCESS,
   EDIT_APPLICANT_ERROR,
+  CLEAN_ORPHAN_SKILL,
 } from './actions';
 
 const initialState = {
@@ -485,8 +486,20 @@ const AppProvider = ({ children }) => {
 
 
   const deleteApplication = async (id) => {
-    dispatch({ type: DELETE_APPLICATION, payload: { id } });
-  };
+    try {
+      console.log("deleteApplication....", id);
+      const { data } = await authFetch.delete(`/applicants/${id}`);
+
+      console.log(console.log("deleteApplication....2", id));
+      dispatch({ type: DELETE_APPLICATION, payload: { id, msg:data.msg } });
+
+      await getApplications();
+      cleanOrphanSkill();
+
+    } catch(error) {
+      if(error.response.status === 401) return;
+    }
+  }
 
   const setEditApplication = (id) => {
     dispatch({ type: SET_EDIT_APPLICATION, payload: { id } });
@@ -549,7 +562,10 @@ const AppProvider = ({ children }) => {
 
   };
 
-  
+  const cleanOrphanSkill = () => {
+    dispatch({type: CLEAN_ORPHAN_SKILL})
+  };
+
 
   useEffect(() => {
     getCurrentUser();
@@ -586,6 +602,7 @@ const AppProvider = ({ children }) => {
         setEditApplication,    
         toggleSelectedSkills,
         editApplicant,
+        cleanOrphanSkill,
       }}
     >
       {children}

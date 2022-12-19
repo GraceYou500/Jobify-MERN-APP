@@ -51,6 +51,7 @@ import {
   EDIT_APPLICANT_BEGIN,
   EDIT_APPLICANT_SUCCESS,
   EDIT_APPLICANT_ERROR,
+  CLEAN_ORPHAN_SKILL,
 } from './actions';
 import { initialState } from './appContext';
 
@@ -510,6 +511,9 @@ const reducer = (state, action) => {
     );
     return {
       ...state,
+      showAlert:true,
+      alertText: action.payload.msg,
+      alertType: 'success',
       applications: newApps,
     };
   }
@@ -573,6 +577,21 @@ const reducer = (state, action) => {
 
     }
   }
+
+  if(action.type === CLEAN_ORPHAN_SKILL) {
+    const validSelectedSkills = state.selectedSkills;
+    for (let i in validSelectedSkills) {
+      if (!state.allSkills.includes(validSelectedSkills[i])) {
+        validSelectedSkills.splice(i,1);
+      }
+    }
+    // console.log("CLEAN_ORPHAN_SKILL....",validSelectedSkills);
+    return {
+      ...state,
+      selectedSkills:validSelectedSkills,
+    }
+  }
+
 
   throw new Error(`no such action: ${action.type}`);
 };

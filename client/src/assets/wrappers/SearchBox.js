@@ -8,35 +8,9 @@ const Wrapper = styled.section`
   .container-box {
     padding: 1rem 2rem;
   }
-  .skills {
-    display: flex;
-    column-gap: 1rem;
-  }
-  .java {
-    background: #fcefc7;
-    color: #e9b949;
-    text-align: center;
-    width: 100px;
-    height: 30px;
-    border-radius: var(--borderRadius);
-  }
-
-  .js {
-    background: #e0e8f9;
-    color: #647acb;
-    text-align: center;
-    width: 100px;
-    height: 30px;
-    border-radius: var(--borderRadius);
-  }
-
-  .react {
-    color: #d66a6a;
-    background: #ffeeee;
-    text-align: center;
-    width: 100px;
-    height: 30px;
-    border-radius: var(--borderRadius);
+  .skills button {
+    margin-right: 1rem; 
+    margin-bottom:1rem;
   }
 
   .actived {
