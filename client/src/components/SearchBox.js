@@ -5,7 +5,7 @@ import SearchSkillTag from "./SearchSkillTag";
 
 const SearchBox = () => {
   const { allSkills, selectedSkills } = useAppContext();
-  console.log("SearchBox.....", allSkills);
+  // console.log("SearchBox.....", allSkills);
  
 
 

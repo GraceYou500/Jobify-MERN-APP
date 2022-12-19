@@ -1,7 +1,7 @@
 import React, { useReducer, useContext, useEffect } from 'react';
 import reducer from './reducer';
 import axios from 'axios';
-import applicationList from '../utils/applicationList';
+import hobbies from '../utils/hobbies';
 import {
   DISPLAY_ALERT,
   CLEAR_ALERT,
@@ -65,7 +65,6 @@ const initialState = {
   alertText: '',
   alertType: '',
   user: null,
-
   userLocation: '',
   isEditing: false,
   idEditingApp: false,
@@ -97,6 +96,8 @@ const initialState = {
   applications: [],
   allSkills:[],
   selectedSkills:[],
+  allHobbies:hobbies,
+
   eidtApplicantId:"",
 };
 
@@ -440,7 +441,7 @@ const AppProvider = ({ children }) => {
 
     try {
       const {data} = await authFetch("/applicants"); // badck
-      console.log("getApplications.....",data);
+      // console.log("getApplications.....",data);
 
       dispatch({ type: SET_APPLICATIONS_SUCCESS, payload: { applications: data.applicants } });
       const extractSkills = extractAllApplicantSkills(data.applicants);
@@ -542,7 +543,7 @@ const AppProvider = ({ children }) => {
   };
 
   const extractAllApplicantSkills = (applicants) => {
-    console.log('extractAllApplicantSkills', applicants);
+    // console.log('extractAllApplicantSkills', applicants);
     const skillSet = new Set();
 
     applicants.forEach((applicant) => {
@@ -551,7 +552,7 @@ const AppProvider = ({ children }) => {
       });
     });
 
-    console.log('skillSet.....', Array.from(skillSet));
+    // console.log('skillSet.....', Array.from(skillSet));
 
     return Array.from(skillSet);
   };

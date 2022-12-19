@@ -23,7 +23,7 @@ useEffect(()=>{
  
   useEffect(() => {
 
-    
+
     if(selectedSkills.length === 0) {      
      setSelectedApps(applications);
       // console.log("selectedApplications.....1", selectedApplications);
@@ -35,8 +35,8 @@ useEffect(()=>{
 
   }, [selectedSkills, applications]);
   //  console.log("applications.......",applications);
-  console.log("selectedSkills....",selectedSkills);
-  console.log("selectedApps.....", selectedApps);
+  // console.log("selectedSkills....",selectedSkills);
+  // console.log("selectedApps.....", selectedApps);
 
   return (
     <Wrapper>

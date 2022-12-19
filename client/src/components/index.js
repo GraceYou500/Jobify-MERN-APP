@@ -17,8 +17,10 @@ import SkillInput from './SkillInput';
 import Applicant from './Applicant';
 import ApplicantContainer from './ApplicantContainer';
 import SearchBox from './SearchBox';
+import HobbiesInput from './HobbiesInput';
 
 export {
+  HobbiesInput,
   SearchBox,
   ApplicantContainer,
   Applicant,

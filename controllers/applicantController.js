@@ -5,9 +5,9 @@ import {
 import Applicant from '../models/Applicant.js';
 
 const createApplicant = async (req, res) => {
-    const { firstName, lastName, position, description, email, skills } = req.body;
+    const { firstName, lastName, position, description, email, skills, hobbies } = req.body;
 
-    const applicant = await Applicant.create({ firstName, lastName, position, description, email, skills, createdAt: new Date() });
+    const applicant = await Applicant.create({ firstName, lastName, position, description, email, skills, hobbies, createdAt: new Date() });
     res.status(StatusCodes.OK).json({ applicant });
 };
 
@@ -31,7 +31,7 @@ const deleteApplicant = async (req, res) => {
 };
 
 const editApplicant = async (req, res) => {
-    const { id, firstName, lastName, position, description, email, skills  } = req.body;
+    const { id, firstName, lastName, position, description, email, skills, hobbies  } = req.body;
 
     const applicant = await Applicant.findOne({ _id: id });
     

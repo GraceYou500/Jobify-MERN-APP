@@ -34,7 +34,10 @@ const ApplicantSchema = new mongoose.Schema(
     },
     skills: [{
         type: String,
-    }]
+    }],
+    hobbies: [{
+      type: String,
+  }]
   },
   { timestamps: true }
 );

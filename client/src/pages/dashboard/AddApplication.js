@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import Wrapper from '../../assets/wrappers/ApplicationFormPage';
-import { FormRow, Alert, SkillInput } from '../../components';
+import { FormRow, Alert, SkillInput, HobbiesInput } from '../../components';
 import { useAppContext } from '../../context/appContext';
+
 
 const AddApplication = () => {
   const {
@@ -35,7 +36,7 @@ const AddApplication = () => {
   };
 
   const skillChangeHandle = (e, index) => {
-    console.log('skillChangeHandle', index, e.target.value);
+    // console.log('skillChangeHandle', index, e.target.value);
     const skillValue = e.target.value;
 
     changeSkill({ skillValue, index });
@@ -154,6 +155,9 @@ const AddApplication = () => {
               })}
             </div>
             <button onClick={addSkillHandler}>Add</button>
+          </div>
+          <div>
+            <HobbiesInput />
           </div>
           <div>
             <FormRow
