@@ -285,6 +285,7 @@ const reducer = (state, action) => {
       applicantPosition: '',
       applicantSkillsList: [''],
       applicantDescription: '',
+      selectedHobbies:[],
     };
     return {
       ...state,
@@ -528,7 +529,7 @@ const reducer = (state, action) => {
     const applicant = state.applications.find(
       (item) => item._id === action.payload.id
     );
-    const { firstName, lastName, position, email, skills, description } = applicant;
+    const { firstName, lastName, position, email, skills, description, hobbies } = applicant;
 
     return {
       ...state,
@@ -540,6 +541,7 @@ const reducer = (state, action) => {
       applicantPosition: position,
       applicantSkillsList: skills,
       applicantDescription: description,
+      selectedHobbies: hobbies,
     };
   }
 

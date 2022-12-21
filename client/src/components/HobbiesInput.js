@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import HobbiesContainer from './HobbiesContainer';
 import HobbiesDropdown from './HobbiesDropdown';
 import Wrapper from '../assets/wrappers/Hobbies';
@@ -8,6 +8,7 @@ const HobbiesInput = () => {
 
   const { hobbyInput,handleChange, enterHobby, clearHobbyInput } = useAppContext()
   const [showDropdown, setShowDropdown] = useState(false);
+  const inputFocus = useRef();
 
   const handleInputChange = (e) => {
     e.preventDefault();
@@ -27,6 +28,10 @@ const HobbiesInput = () => {
     }
   };
 
+  const forcusInputHandle = () => {
+    inputFocus.current.focus();
+  };
+
   useEffect(()=>{
     if (hobbyInput) {
       setShowDropdown(true);
@@ -43,9 +48,9 @@ const HobbiesInput = () => {
         <HobbiesContainer />
         <div className='input-container'>
           <div className='hobbies-inputfield'>
-            <input className='form-row form-input' onChange={handleInputChange} onKeyDown={handleKeyDown} name="hobbyInput" value={hobbyInput}/>                 
+            <input className='form-row form-input' onChange={handleInputChange} onKeyDown={handleKeyDown} ref={inputFocus} name="hobbyInput" value={hobbyInput}/>                 
           </div>
-          <HobbiesDropdown className="dropdown-container" shouldShow={showDropdown}/>  
+          <HobbiesDropdown className="dropdown-container" shouldShow={showDropdown} forcusInput={forcusInputHandle}/>  
         </div>
       </div>
     </Wrapper>

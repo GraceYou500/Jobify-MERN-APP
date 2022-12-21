@@ -4,7 +4,7 @@ import HobbyOption from './HobbyOption';
 
 
 
-const HobbiesDropdown = ({shouldShow}) => {
+const HobbiesDropdown = ({shouldShow, forcusInput}) => {
 
   const { allHobbies, hobbyInput } = useAppContext();
   const [filteredHobbies, setFilteredHobbies] = useState([])
@@ -16,7 +16,7 @@ const HobbiesDropdown = ({shouldShow}) => {
 
   return (
     <div className={`dropdown-container ${shouldShow ? "" :"dropdown-hide"}`}>
-      {filteredHobbies.map((hobby, index)=> <HobbyOption option={hobby} key={index} />)}   
+      {filteredHobbies.map((hobby, index)=> <HobbyOption option={hobby} key={index} focuseInput={forcusInput}/>)}   
     </div>
   )
 }

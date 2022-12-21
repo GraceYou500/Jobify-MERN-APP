@@ -22,6 +22,7 @@ const AddApplication = () => {
     deleteSkill,
     clearValues,
     editApplicant,
+    selectedHobbies,
   } = useAppContext();
 
   // const [skills, setskills] = useState(['']);
@@ -72,7 +73,8 @@ const AddApplication = () => {
       !applicantLastName ||
       !applicantEmail ||
       !applicantPosition ||
-      !applicantSkillsList
+      !applicantSkillsList ||
+      !selectedHobbies
 
       //   || !skills
     ) {

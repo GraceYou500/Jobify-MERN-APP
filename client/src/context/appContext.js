@@ -468,7 +468,9 @@ const AppProvider = ({ children }) => {
         applicantEmail,
         applicantPosition,
         applicantSkillsList,
-        applicantDescription} = state;
+        applicantDescription,
+        selectedHobbies
+      } = state;
       
       await authFetch.put("/applicants", { 
         firstName: applicantFirstName,
@@ -476,7 +478,8 @@ const AppProvider = ({ children }) => {
         email: applicantEmail,
         position:applicantPosition,
         skills:applicantSkillsList,
-        description: applicantDescription
+        description: applicantDescription,
+        hobbies: selectedHobbies,
       })
 
    
@@ -524,7 +527,8 @@ const AppProvider = ({ children }) => {
       applicantPosition,
       applicantSkillsList,
       applicantDescription,
-      eidtApplicantId
+      eidtApplicantId,
+      selectedHobbies,
     } = state;
 
     await authFetch.post("/applicants", {
@@ -534,7 +538,8 @@ const AppProvider = ({ children }) => {
       position:applicantPosition,
       skills:applicantSkillsList,
       description: applicantDescription,
-      id:eidtApplicantId
+      id:eidtApplicantId,
+      hobbies: selectedHobbies,
     });
 
     dispatch({type: EDIT_APPLICANT_SUCCESS})
