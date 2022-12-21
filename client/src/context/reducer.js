@@ -52,6 +52,10 @@ import {
   EDIT_APPLICANT_SUCCESS,
   EDIT_APPLICANT_ERROR,
   CLEAN_ORPHAN_SKILL,
+  HOBBY_SELECT,
+  DELETE_HOBBY_SELECTED,
+  ENTER_HOBBY_TO_LIST,
+  CLEAR_HOBBY_INPUT,
 } from './actions';
 import { initialState } from './appContext';
 
@@ -218,14 +222,16 @@ const reducer = (state, action) => {
     };
   }
 
-  if (action.type === ADD_SKILLS) {
-    return {
-      ...state,
-      applicantSkillsList: action.payload.skillsList,
-    };
-  }
+  // if (action.type === ADD_SKILLS) {
+
+  //   return {
+  //     ...state,
+  //     applicantSkillsList: action.payload.skillsList,
+  //   };
+  // }
 
   if (action.type === ADD_SKILL) {
+    console.log("ADD_SKILLS......");
     return {
       ...state,
       applicantSkillsList: [...state.applicantSkillsList, ''],
@@ -592,6 +598,47 @@ const reducer = (state, action) => {
     }
   }
 
+  if (action.type === HOBBY_SELECT) {
+    let newArr = [...state.selectedHobbies];
+
+    if(!newArr.includes(action.payload.hobby)) {
+      newArr = [...state.selectedHobbies, action.payload.hobby];
+    }
+    
+    return {
+      ...state,
+      selectedHobbies: newArr,
+    }
+  }
+
+  if (action.type === DELETE_HOBBY_SELECTED) {
+    const newHobbies = state.selectedHobbies.filter(hobby => hobby !== action.payload.hobby);
+
+    return {
+      ...state,
+      selectedHobbies: newHobbies,
+    }
+  }
+
+  if (action.type === ENTER_HOBBY_TO_LIST) {
+    let newArr = [...state.selectedHobbies];
+
+    if(!newArr.includes(state.hobbyInput)) {
+      newArr = [...state.selectedHobbies, state.hobbyInput];
+    }
+
+    return {
+      ...state,
+      selectedHobbies: newArr,
+    }  
+  }
+
+  if (action.type === CLEAR_HOBBY_INPUT) {
+    return {
+      ...state,
+      hobbyInput:"",
+    }
+  }
 
   throw new Error(`no such action: ${action.type}`);
 };

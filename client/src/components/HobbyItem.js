@@ -1,10 +1,18 @@
 import React from 'react'
+import Wrapper from '../assets/wrappers/Hobbies';
+import { useAppContext } from '../context/appContext';
 
-const HobbyItem = () => {
+
+const HobbyItem = ({value}) => {
+
+  const { deleteHobbySelected } = useAppContext()
   return (
-    <div>
-      <h5>Hobby Item selected</h5>
-    </div>
+    <Wrapper>
+      <div className='hobby-item'>
+        {value}
+        <span className='delete-btn' onClick={()=> deleteHobbySelected(value)}>x</span>
+      </div>
+    </Wrapper>
   )
 }
 

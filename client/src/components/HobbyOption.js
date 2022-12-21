@@ -1,10 +1,22 @@
 import React from 'react'
+import Wrapper from '../assets/wrappers/Hobbies';
+import { useAppContext } from '../context/appContext';
 
-const HobbyOption = () => {
+const HobbyOption = ({option}) => {
+
+  const { selectHobbyFromDropdown, clearHobbyInput  } = useAppContext()
+  const choseValue = () => { 
+    console.log("choseValue......",option);
+    selectHobbyFromDropdown(option);
+    clearHobbyInput();
+  };
+
   return (
-    <div>
-      <h5>Hobby Option</h5>
-    </div>
+    <Wrapper>
+      <div onClick={choseValue} className="hobby-option">
+        {option}
+      </div>
+    </Wrapper>
   )
 }
 

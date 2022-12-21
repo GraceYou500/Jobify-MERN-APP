@@ -55,6 +55,10 @@ import {
   EDIT_APPLICANT_SUCCESS,
   EDIT_APPLICANT_ERROR,
   CLEAN_ORPHAN_SKILL,
+  HOBBY_SELECT,
+  DELETE_HOBBY_SELECTED,
+  ENTER_HOBBY_TO_LIST,
+  CLEAR_HOBBY_INPUT,
 } from './actions';
 
 const initialState = {
@@ -97,7 +101,8 @@ const initialState = {
   allSkills:[],
   selectedSkills:[],
   allHobbies:hobbies,
-
+  hobbyInput:"",
+  selectedHobbies:[],
   eidtApplicantId:"",
 };
 
@@ -424,6 +429,7 @@ const AppProvider = ({ children }) => {
   };
 
   const addSkill = () => {
+    console.log("Context ---- addSkill");
     dispatch({ type: ADD_SKILL });
   };
 
@@ -567,6 +573,24 @@ const AppProvider = ({ children }) => {
     dispatch({type: CLEAN_ORPHAN_SKILL})
   };
 
+  const selectHobbyFromDropdown = (hobby) => {
+    dispatch({type: HOBBY_SELECT, payload: {hobby}});
+
+  };
+
+  const deleteHobbySelected = (hobby) => {
+
+    dispatch({type: DELETE_HOBBY_SELECTED, payload:{ hobby }});
+  }
+
+  const enterHobby = () =>{
+    dispatch({ type: ENTER_HOBBY_TO_LIST })
+  };
+
+  const clearHobbyInput = () => {
+    dispatch({ type: CLEAR_HOBBY_INPUT })
+  };
+
 
   useEffect(() => {
     getCurrentUser();
@@ -604,6 +628,10 @@ const AppProvider = ({ children }) => {
         toggleSelectedSkills,
         editApplicant,
         cleanOrphanSkill,
+        selectHobbyFromDropdown,
+        deleteHobbySelected,
+        enterHobby,
+        clearHobbyInput,
       }}
     >
       {children}

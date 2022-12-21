@@ -29,6 +29,7 @@ const AddApplication = () => {
   const navigate = useNavigate();
 
   const addSkillHandler = (e) => {
+    console.log("addSkillHandler......");
     e.preventDefault();
 
     addSkill();
@@ -154,7 +155,7 @@ const AddApplication = () => {
                 );
               })}
             </div>
-            <button onClick={addSkillHandler}>Add</button>
+            <button onClick={addSkillHandler} type="button">Add</button>
           </div>
           <div>
             <HobbiesInput />
