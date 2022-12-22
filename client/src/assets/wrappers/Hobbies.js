@@ -74,6 +74,10 @@ const Wrapper = styled.section`
   height:18px;
   background-color: var(--red-midium);
  }
+
+ .font-change {
+   color:red;
+ }
 `
 
 export default Wrapper

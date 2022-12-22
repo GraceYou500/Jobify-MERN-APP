@@ -10,7 +10,7 @@ const HobbiesDropdown = ({shouldShow, forcusInput}) => {
   const [filteredHobbies, setFilteredHobbies] = useState([])
 
   useEffect(()=>{
-   const hobbies = allHobbies.filter(hobby => hobby.includes(hobbyInput))
+   const hobbies = allHobbies.filter(hobby => hobby.toLowerCase().includes(hobbyInput.toLowerCase()))
    setFilteredHobbies(hobbies)
   },[hobbyInput]);
 

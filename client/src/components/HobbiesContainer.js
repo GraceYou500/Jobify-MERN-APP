@@ -5,6 +5,8 @@ import { useAppContext } from '../context/appContext'
 
 const HobbiesContainer = () => {
 
+
+
   const { selectedHobbies } = useAppContext();
 
   return (
@@ -12,6 +14,7 @@ const HobbiesContainer = () => {
       <div className='hobbies-container'>
         {selectedHobbies.map((hobby, index) => <HobbyItem value={hobby} key={index}/>)}  
       </div>
+     
     </Wrapper>
   )
 }

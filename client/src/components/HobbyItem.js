@@ -11,6 +11,7 @@ const HobbyItem = ({value}) => {
       <div className='hobby-item'>
         {value}
         <span className='delete-btn' onClick={()=> deleteHobbySelected(value)}>x</span>
+        
       </div>
     </Wrapper>
   )
