@@ -39,6 +39,7 @@ import {
   CHANGE_SKILL,
   DELETE_SKILL,
   DELETE_APPLICATION,
+  DELETE_APPLICATION_ERROR,
   SET_EDIT_APPLICATION,
   SET_ALL_SKILLS,
   TOGGLE_SELECTED_SKILLS,
@@ -56,6 +57,7 @@ import {
   DELETE_HOBBY_SELECTED,
   ENTER_HOBBY_TO_LIST,
   CLEAR_HOBBY_INPUT,
+  
 } from './actions';
 import { initialState } from './appContext';
 
@@ -522,6 +524,16 @@ const reducer = (state, action) => {
       alertText: action.payload.msg,
       alertType: 'success',
       applications: newApps,
+    };
+  }
+
+  if (action.type === DELETE_APPLICATION_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertText: action.payload.msg,
+      alertType: 'danger',
     };
   }
 

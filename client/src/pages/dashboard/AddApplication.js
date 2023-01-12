@@ -86,7 +86,7 @@ const AddApplication = () => {
       editApplicant();
 
       setTimeout(()=>{
-        navigate('/all-applications');
+        navigate('/all-applicants');
       },3000)
     
       return;
@@ -94,20 +94,20 @@ const AddApplication = () => {
 
     createApplicant();
     setTimeout(()=>{
-      navigate('/all-applications');
+      navigate('/all-applicants');
     },3000)
   };
 
   const backToAllHandle = (e) => {
     e.preventDefault();
     clearValues();
-    navigate('/all-applications');
+    navigate('/all-applicants');
   };
 
   return (
     <Wrapper>
       <form onSubmit={submitHandler}>
-        <h3>{idEditingApp ? 'Edit' : 'Add'} Application</h3>
+        <h3>{idEditingApp ? 'Edit' : 'Add'} Applicant</h3>
         {showAlert && <Alert />}
         <div className='form-container'>
           <div className='form-center'>

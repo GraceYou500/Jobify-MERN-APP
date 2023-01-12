@@ -4,6 +4,7 @@ import Wrapper from '../assets/wrappers/Job';
 import { FaEnvelope, FaCalendarAlt, FaBriefcase } from 'react-icons/fa';
 import JobInfo from './JobInfo';
 import { useAppContext } from '../context/appContext';
+import moment from 'moment';
 
 const Applicant = ({
   firstName,
@@ -15,6 +16,9 @@ const Applicant = ({
   _id,
 }) => {
   const { deleteApplication, setEditApplication} = useAppContext();
+
+  let date = moment(createdAt);
+  date = date.format('MMM Do, YYYY');
 
   return (
     <Wrapper>
@@ -28,7 +32,7 @@ const Applicant = ({
       <div className='content'>
         <div className='content-center'>
           <JobInfo icon={<FaEnvelope />} text={email} />
-          <JobInfo icon={<FaCalendarAlt />} text={createdAt} />
+          <JobInfo icon={<FaCalendarAlt />} text={date} />
           <JobInfo icon={<FaBriefcase />} text={position} />
           <div className='content-skills'>
             <div className='java'>{skills[0]}</div>
@@ -40,7 +44,7 @@ const Applicant = ({
           <div className='actions'>
             <Link
               className='btn edit-btn'
-              to='/add-application'
+              to='/add-applicant'
               onClick={() => setEditApplication(_id)}
             >
               Edit

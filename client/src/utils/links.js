@@ -24,14 +24,14 @@ const links = [
   },
   {
     id: 4,
-    text: 'all applications',
-    path: 'all-applications',
+    text: 'all applicants',
+    path: 'all-applicants',
     icon: <MdQueryStats />,
   },
   {
     id: 5,
-    text: 'add application',
-    path: 'add-application',
+    text: 'add applicant',
+    path: 'add-applicant',
     icon: <FaWpforms />,
   },
   {

@@ -59,6 +59,7 @@ import {
   DELETE_HOBBY_SELECTED,
   ENTER_HOBBY_TO_LIST,
   CLEAR_HOBBY_INPUT,
+  DELETE_APPLICATION_ERROR,
 } from './actions';
 
 const initialState = {
@@ -508,6 +509,11 @@ const AppProvider = ({ children }) => {
 
     } catch(error) {
       if(error.response.status === 401) return;
+
+      dispatch({
+        type: DELETE_APPLICATION_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
     }
   }
 

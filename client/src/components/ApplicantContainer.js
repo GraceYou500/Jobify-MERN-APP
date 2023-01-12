@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Applicant from './Applicant';
+import Pagination from './Pagination';
 import Wrapper from '../assets/wrappers/JobsContainer';
 import { useAppContext } from '../context/appContext';
 
@@ -14,11 +15,14 @@ const isSelected = (selectedSkills, applicationSkills) =>{
 
 const ApplicantContainer = () => {
   const {  applications, selectedSkills,  getApplications } = useAppContext();
-  const [selectedApps, setSelectedApps] = useState([])
+  const [selectedApps, setSelectedApps] = useState([]);
 
-useEffect(()=>{
-  getApplications()
-},[])
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(10);
+
+  useEffect(()=>{
+    getApplications()
+  },[])
   
  
   useEffect(() => {
@@ -26,26 +30,35 @@ useEffect(()=>{
 
     if(selectedSkills.length === 0) {      
      setSelectedApps(applications);
-      // console.log("selectedApplications.....1", selectedApplications);
-      // console.log("applications.......1",applications);
+   
     } else {
       const selected = applications.filter((application) => isSelected(selectedSkills, application.skills))
       setSelectedApps(selected);
     }
 
   }, [selectedSkills, applications]);
-  //  console.log("applications.......",applications);
-  // console.log("selectedSkills....",selectedSkills);
-  // console.log("selectedApps.....", selectedApps);
+
+  // Get current posts
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+
+  const currentApplicants = selectedApps.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Change page
+  const changeApplicantsPage =(pagItem) =>{
+    setCurrentPage(pagItem);
+  };
 
   return (
     <Wrapper>
-      <h5>{selectedApps.length} Applications found</h5>
+      <h5>{selectedApps.length} Applicant{selectedApps.length > 1 && 's'} found</h5>
       <div className='jobs'>
-        {selectedApps.map((item, index) => {
+        {currentApplicants.map((item, index) => {
           return <Applicant {...item} key={index} />;
         })}
       </div>
+      {/* pagination buttons */}
+     <Pagination postsPerPage={postsPerPage} totalPosts={selectedApps.length} currentPage = {currentPage} changeApplicantsPage= {changeApplicantsPage} />
     </Wrapper>
   );
 };
