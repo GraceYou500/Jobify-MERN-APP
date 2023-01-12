@@ -49,6 +49,12 @@ const ApplicantContainer = () => {
     setCurrentPage(pagItem);
   };
 
+  const pageNumbers = [];
+
+  for (let i =1; i <= Math.ceil(selectedApps.length / postsPerPage); i++) {
+    pageNumbers.push(i);
+  };
+
   return (
     <Wrapper>
       <h5>{selectedApps.length} Applicant{selectedApps.length > 1 && 's'} found</h5>
@@ -58,7 +64,7 @@ const ApplicantContainer = () => {
         })}
       </div>
       {/* pagination buttons */}
-     <Pagination postsPerPage={postsPerPage} totalPosts={selectedApps.length} currentPage = {currentPage} changeApplicantsPage= {changeApplicantsPage} />
+     <Pagination currentPage = {currentPage} changeApplicantsPage= {changeApplicantsPage} pageNumbers = {pageNumbers}/>
     </Wrapper>
   );
 };

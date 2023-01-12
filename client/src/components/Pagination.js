@@ -2,19 +2,30 @@ import React from 'react';
 import Wrapper from '../assets/wrappers/PageBtnContainer';
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
 
-const Pagination = ({ postsPerPage, totalPosts, currentPage, changeApplicantsPage}) => {
+const Pagination = ({ currentPage, changeApplicantsPage, pageNumbers}) => {
 
-  const pageNumbers = [];
-
-  for (let i =1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
-    pageNumbers.push(i);
-  };
+ 
 
   const prevPage = () => {
+    let newPage = currentPage - 1;
+    if (newPage < 1) {
+      newPage = pageNumbers.length;
+    }
+
+    changeApplicantsPage(newPage);
 
   };
 
   const nextPage = () => {
+    console.log("pageNumbers....", pageNumbers);
+    let newPage = currentPage + 1;
+    if (newPage > pageNumbers.length) {
+      newPage = 1;
+    };
+
+    console.log("nextPage......",newPage);
+ 
+    changeApplicantsPage(newPage);
 
   };
 

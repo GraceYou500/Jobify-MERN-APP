@@ -25,6 +25,7 @@ const PageBtnContainer = () => {
       newPage = 1;
     }
 
+    console.log("nextPage......",newPage);
     changePage(newPage);
   };
 
