@@ -364,6 +364,7 @@ const AppProvider = ({ children }) => {
         type: EDIT_JOB_ERROR,
         payload: { msg: error.response.data.msg },
       });
+
     }
     clearAlert();
   };
@@ -382,7 +383,6 @@ const AppProvider = ({ children }) => {
         payload: { msg: error.response.data.msg },
       });
     }
-
     clearAlert();
   };
 

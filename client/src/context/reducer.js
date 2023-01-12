@@ -389,7 +389,7 @@ const reducer = (state, action) => {
     };
   }
 
-  if (action.type === EDIT_APPLICANT_ERROR) {
+  if (action.type === EDIT_JOB_ERROR) {
     return {
       ...state,
       isLoading: false,
@@ -596,6 +596,16 @@ const reducer = (state, action) => {
       alertType: 'success',
 
     }
+  }
+
+  if (action.type === EDIT_APPLICANT_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertText: action.payload.msg,
+      alertType: 'danger',
+    };
   }
 
   if(action.type === CLEAN_ORPHAN_SKILL) {
