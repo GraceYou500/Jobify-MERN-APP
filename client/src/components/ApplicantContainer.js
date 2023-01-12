@@ -64,7 +64,7 @@ const ApplicantContainer = () => {
         })}
       </div>
       {/* pagination buttons */}
-     <Pagination currentPage = {currentPage} changeApplicantsPage= {changeApplicantsPage} pageNumbers = {pageNumbers}/>
+      {pageNumbers.length > 1 && <Pagination currentPage = {currentPage} changeApplicantsPage= {changeApplicantsPage} pageNumbers = {pageNumbers}/>}
     </Wrapper>
   );
 };

@@ -4,8 +4,6 @@ import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
 
 const Pagination = ({ currentPage, changeApplicantsPage, pageNumbers}) => {
 
- 
-
   const prevPage = () => {
     let newPage = currentPage - 1;
     if (newPage < 1) {
