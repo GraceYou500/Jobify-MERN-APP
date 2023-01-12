@@ -483,18 +483,15 @@ const AppProvider = ({ children }) => {
         hobbies: selectedHobbies,
       })
 
-   
-
       dispatch({type: CREATE_APPLICANTS_SUCCESS})
       dispatch({type: CLEAR_VALUES})
         
     } catch(error) {
       if(error.response.status === 401) return;
-      dispatch({type: CREATE_APPLICANTS_ERROR})
+      dispatch({type: CREATE_APPLICANTS_ERROR, payload: { msg: error.response.data.msg }})
     }
     clearAlert();
   };
-
 
   const deleteApplication = async (id) => {
     try {
@@ -553,7 +550,7 @@ const AppProvider = ({ children }) => {
 
     }catch(error) {
       if (error.response.status === 401) return;
-      dispatch({EDIT_APPLICANT_ERROR, payload:{msg: error.response.data.msg}})
+      dispatch({type:EDIT_APPLICANT_ERROR, payload:{msg: error.response.data.msg}})
 
     }
     clearAlert();

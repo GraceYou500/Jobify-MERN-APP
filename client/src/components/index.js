@@ -18,8 +18,10 @@ import Applicant from './Applicant';
 import ApplicantContainer from './ApplicantContainer';
 import SearchBox from './SearchBox';
 import HobbiesInput from './HobbiesInput';
+import Pagination from './Pagination';
 
 export {
+  Pagination,
   HobbiesInput,
   SearchBox,
   ApplicantContainer,

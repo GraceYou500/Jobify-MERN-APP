@@ -389,7 +389,7 @@ const reducer = (state, action) => {
     };
   }
 
-  if (action.type === EDIT_JOB_ERROR) {
+  if (action.type === EDIT_APPLICANT_ERROR) {
     return {
       ...state,
       isLoading: false,

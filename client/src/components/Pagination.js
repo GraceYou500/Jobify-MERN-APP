@@ -15,7 +15,7 @@ const Pagination = ({ currentPage, changeApplicantsPage, pageNumbers}) => {
   };
 
   const nextPage = () => {
-    console.log("pageNumbers....", pageNumbers);
+  
     let newPage = currentPage + 1;
     if (newPage > pageNumbers.length) {
       newPage = 1;
