@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Wrapper from '../assets/wrappers/Job';
 import { FaEnvelope, FaCalendarAlt, FaBriefcase } from 'react-icons/fa';
 import JobInfo from './JobInfo';
-import { useAppContext } from '../context/appContext';
 import moment from 'moment';
 
 const Applicant = ({
@@ -14,8 +13,9 @@ const Applicant = ({
   position,
   skills,
   _id,
+  deleteApplication, 
+  setEditApplication,
 }) => {
-  const { deleteApplication, setEditApplication} = useAppContext();
 
   let date = moment(createdAt);
   date = date.format('MMM Do, YYYY');

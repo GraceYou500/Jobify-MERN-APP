@@ -31,7 +31,7 @@ const paginateApplicants = (currentPage, postsPerPage, selectedApps, isShowPagin
 
 
 const ApplicantContainer = () => {
-  const {  applications, selectedSkills,  getApplications, showAlert } = useAppContext();
+  const { applications, selectedSkills, getApplications, showAlert, deleteApplication, setEditApplication } = useAppContext();
   const [selectedApps, setSelectedApps] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -78,11 +78,11 @@ const ApplicantContainer = () => {
       <h5>{selectedApps.length} Applicant{selectedApps.length > 1 && 's'} found</h5>
       <div className='jobs'>
         {paginatedApplicants.map((item, index) => {
-          return <Applicant {...item} key={index} />;
+          return <Applicant {...item} key={index} deleteApplication={deleteApplication} setEditApplication={setEditApplication} />;
         })}
       </div>
       {/* pagination buttons */}
-      {isShowPagination && <Pagination currentPage = {currentPage} changeApplicantsPage= {changeApplicantsPage} pageNumbers = {pageNumbers}/>}
+      {isShowPagination && <Pagination currentPage={currentPage} changeApplicantsPage={changeApplicantsPage} pageNumbers={pageNumbers}/>}
     </Wrapper>
   );
 };

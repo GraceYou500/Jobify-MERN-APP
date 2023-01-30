@@ -1,20 +1,20 @@
-import React from 'react'
-import { useAppContext } from '../context/appContext';
-import Wrapper from '../assets/wrappers/SearchBox';
+import React from 'react';
 
-const SearchSkillTag = ({tagName,isActive}) => {
-  const { toggleSelectedSkills } = useAppContext();
-
+const SearchSkillTag = ({ tagName, isActive, toggleSkills }) => {
   const activeHandle = () => {
-    console.log("tagName...",tagName);
-    toggleSelectedSkills(tagName);
+    console.log('tagName...', tagName);
+    toggleSkills(tagName);
   };
 
   return (
-    <button type='button' className={`btn ${isActive ? "actived" :""}`} onClick={activeHandle}>
+    <button
+      type='button'
+      className={`btn ${isActive ? 'actived' : ''}`}
+      onClick={activeHandle}
+    >
       {tagName}
     </button>
-  )
-}
+  );
+};
 
-export default SearchSkillTag
+export default SearchSkillTag;

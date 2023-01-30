@@ -16,6 +16,8 @@ const JobsContainer = () => {
     searchType,
     sort,
     showAlert,
+    setEditJob,
+    deleteJob,
   } = useAppContext();
 
   useEffect(() => {
@@ -43,7 +45,12 @@ const JobsContainer = () => {
       </h5>
       <div className='jobs'>
         {jobs.map((job) => (
-          <Job key={job._id} {...job} />
+          <Job
+            key={job._id}
+            {...job}
+            setEditJob={setEditJob}
+            deleteJob={deleteJob}
+          />
         ))}
       </div>
       {/* pagination buttons */}

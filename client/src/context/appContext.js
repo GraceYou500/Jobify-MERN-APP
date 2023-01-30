@@ -99,12 +99,12 @@ const initialState = {
   applicantSkillsList: [''],
   applicantDescription: '',
   applications: [],
-  allSkills:[],
-  selectedSkills:[],
-  allHobbies:hobbies,
-  hobbyInput:"",
-  selectedHobbies:[],
-  eidtApplicantId:"",
+  allSkills: [],
+  selectedSkills: [],
+  allHobbies: hobbies,
+  hobbyInput: '',
+  selectedHobbies: [],
+  eidtApplicantId: '',
 };
 
 const AppContext = React.createContext();
@@ -364,7 +364,6 @@ const AppProvider = ({ children }) => {
         type: EDIT_JOB_ERROR,
         payload: { msg: error.response.data.msg },
       });
-
     }
     clearAlert();
   };
@@ -430,7 +429,7 @@ const AppProvider = ({ children }) => {
   };
 
   const addSkill = () => {
-    console.log("Context ---- addSkill");
+    console.log('Context ---- addSkill');
     dispatch({ type: ADD_SKILL });
   };
 
@@ -443,25 +442,28 @@ const AppProvider = ({ children }) => {
   };
 
   const getApplications = async () => {
-
-    dispatch({ type: SET_APPLICATIONS_BEGIN});
+    dispatch({ type: SET_APPLICATIONS_BEGIN });
 
     try {
-      const {data} = await authFetch("/applicants"); // badck
+      const { data } = await authFetch('/applicants'); // badck
       // console.log("getApplications.....",data);
 
-      dispatch({ type: SET_APPLICATIONS_SUCCESS, payload: { applications: data.applicants } });
+      dispatch({
+        type: SET_APPLICATIONS_SUCCESS,
+        payload: { applications: data.applicants },
+      });
       const extractSkills = extractAllApplicantSkills(data.applicants);
-      dispatch({type: SET_ALL_SKILLS, payload: { extractSkills }}); // for all skills buttons
-
-    } catch(error) {
-      dispatch({type: SET_APPLICATIONS_ERROR, payload:{ msg: error.response.data.msg}})
+      dispatch({ type: SET_ALL_SKILLS, payload: { extractSkills } }); // for all skills buttons
+    } catch (error) {
+      dispatch({
+        type: SET_APPLICATIONS_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
     }
-  
   };
 
   const createApplicant = async () => {
-    dispatch({ type: CREATE_APPLICANTS_BEGIN});
+    dispatch({ type: CREATE_APPLICANTS_BEGIN });
     try {
       const {
         applicantFirstName,
@@ -470,88 +472,88 @@ const AppProvider = ({ children }) => {
         applicantPosition,
         applicantSkillsList,
         applicantDescription,
-        selectedHobbies
+        selectedHobbies,
       } = state;
-      
-      await authFetch.put("/applicants", { 
+
+      await authFetch.put('/applicants', {
         firstName: applicantFirstName,
         lastName: applicantLastName,
         email: applicantEmail,
-        position:applicantPosition,
-        skills:applicantSkillsList,
+        position: applicantPosition,
+        skills: applicantSkillsList,
         description: applicantDescription,
         hobbies: selectedHobbies,
-      })
+      });
 
-      dispatch({type: CREATE_APPLICANTS_SUCCESS})
-      dispatch({type: CLEAR_VALUES})
-        
-    } catch(error) {
-      if(error.response.status === 401) return;
-      dispatch({type: CREATE_APPLICANTS_ERROR, payload: { msg: error.response.data.msg }})
+      dispatch({ type: CREATE_APPLICANTS_SUCCESS });
+      dispatch({ type: CLEAR_VALUES });
+    } catch (error) {
+      if (error.response.status === 401) return;
+      dispatch({
+        type: CREATE_APPLICANTS_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
     }
     clearAlert();
   };
 
   const deleteApplication = async (id) => {
     try {
-      console.log("deleteApplication....", id);
+      console.log('deleteApplication....', id);
       const { data } = await authFetch.delete(`/applicants/${id}`);
 
-      console.log(console.log("deleteApplication....2", id));
-      dispatch({ type: DELETE_APPLICATION, payload: { id, msg:data.msg } });
+      console.log(console.log('deleteApplication....2', id));
+      dispatch({ type: DELETE_APPLICATION, payload: { id, msg: data.msg } });
 
       await getApplications();
       cleanOrphanSkill();
-
-    } catch(error) {
-      if(error.response.status === 401) return;
+    } catch (error) {
+      if (error.response.status === 401) return;
 
       dispatch({
         type: DELETE_APPLICATION_ERROR,
         payload: { msg: error.response.data.msg },
       });
     }
-  }
+  };
 
   const setEditApplication = (id) => {
     dispatch({ type: SET_EDIT_APPLICATION, payload: { id } });
   };
 
-  const editApplicant =async () =>{
-
-    dispatch({type: EDIT_APPLICANT_BEGIN});
+  const editApplicant = async () => {
+    dispatch({ type: EDIT_APPLICANT_BEGIN });
     try {
-
       const {
-      applicantFirstName,
-      applicantLastName,
-      applicantEmail,
-      applicantPosition,
-      applicantSkillsList,
-      applicantDescription,
-      eidtApplicantId,
-      selectedHobbies,
-    } = state;
+        applicantFirstName,
+        applicantLastName,
+        applicantEmail,
+        applicantPosition,
+        applicantSkillsList,
+        applicantDescription,
+        eidtApplicantId,
+        selectedHobbies,
+      } = state;
 
-    await authFetch.post("/applicants", {
-      firstName: applicantFirstName,
-      lastName: applicantLastName,
-      email: applicantEmail,
-      position:applicantPosition,
-      skills:applicantSkillsList,
-      description: applicantDescription,
-      id:eidtApplicantId,
-      hobbies: selectedHobbies,
-    });
+      await authFetch.post('/applicants', {
+        firstName: applicantFirstName,
+        lastName: applicantLastName,
+        email: applicantEmail,
+        position: applicantPosition,
+        skills: applicantSkillsList,
+        description: applicantDescription,
+        id: eidtApplicantId,
+        hobbies: selectedHobbies,
+      });
 
-    dispatch({type: EDIT_APPLICANT_SUCCESS})
-    dispatch({ type: CLEAR_VALUES });
-
-    }catch(error) {
+      dispatch({ type: EDIT_APPLICANT_SUCCESS });
+      dispatch({ type: CLEAR_VALUES });
+    } catch (error) {
       if (error.response.status === 401) return;
-      dispatch({type:EDIT_APPLICANT_ERROR, payload:{msg: error.response.data.msg}})
-
+      dispatch({
+        type: EDIT_APPLICANT_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
     }
     clearAlert();
   };
@@ -572,37 +574,32 @@ const AppProvider = ({ children }) => {
   };
 
   const toggleSelectedSkills = (skill) => {
-    dispatch({type: TOGGLE_SELECTED_SKILLS, payload: { skill }})
+    dispatch({ type: TOGGLE_SELECTED_SKILLS, payload: { skill } });
     // dispatch({type: SELECTED_SKILLS})
-
   };
 
   const cleanOrphanSkill = () => {
-    dispatch({type: CLEAN_ORPHAN_SKILL})
+    dispatch({ type: CLEAN_ORPHAN_SKILL });
   };
 
   const selectHobbyFromDropdown = (hobby) => {
-    dispatch({type: HOBBY_SELECT, payload: {hobby}});
-
+    dispatch({ type: HOBBY_SELECT, payload: { hobby } });
   };
 
   const deleteHobbySelected = (hobby) => {
+    dispatch({ type: DELETE_HOBBY_SELECTED, payload: { hobby } });
+  };
 
-    dispatch({type: DELETE_HOBBY_SELECTED, payload:{ hobby }});
-  }
-
-  const enterHobby = () =>{
-    dispatch({ type: ENTER_HOBBY_TO_LIST })
+  const enterHobby = () => {
+    dispatch({ type: ENTER_HOBBY_TO_LIST });
   };
 
   const clearHobbyInput = () => {
-    dispatch({ type: CLEAR_HOBBY_INPUT })
+    dispatch({ type: CLEAR_HOBBY_INPUT });
   };
-
 
   useEffect(() => {
     getCurrentUser();
-   
   }, []);
 
   return (
@@ -632,7 +629,7 @@ const AppProvider = ({ children }) => {
         deleteSkill,
         getApplications,
         deleteApplication,
-        setEditApplication,    
+        setEditApplication,
         toggleSelectedSkills,
         editApplicant,
         cleanOrphanSkill,

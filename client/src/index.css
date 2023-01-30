@@ -13,7 +13,7 @@ html {
 
 :root {
   /* colors */
-  --primary-50: #e0fcff;
+  /* --primary-50: #e0fcff;
   --primary-100: #bef8fd;
   --primary-200: #87eaf2;
   --primary-300: #54d1db;
@@ -22,7 +22,19 @@ html {
   --primary-600: #14919b;
   --primary-700: #0e7c86;
   --primary-800: #0a6c74;
-  --primary-900: #044e54;
+  --primary-900: #044e54; */
+
+  --primary-50: #f2edf7;
+  --primary-100: #e6dcef;
+  --primary-200: #cdb8e0;
+  --primary-300: #b395d0;
+  --primary-400: #9a71c1;
+  --primary-500: #8e60b9; 
+  /* --primary-500: #814eb1; */
+  --primary-600: #74469f;
+  --primary-700: #5a377c;
+  --primary-800: #412759;
+  --primary-900: #271735;
 
   /* grey */
   --grey-50: #f0f4f8;
@@ -321,3 +333,17 @@ ul {
     margin-right: 0.5rem;
   }
 }
+
+/* 
+'primary': (181, 64%, 26%),      // #186b6d
+        'success': (166, 100%, 33%),      // #00a680
+        'info': (197.9, 76.1%, 45.9%),    // #1c99ce
+        'warning': (46.6, 94.3%, 51.6%),  // #f8c40f
+        'danger': (358.1, 100%, 42.4%),   // #d80007
+        'grey': (0, 0%, 50%),             // #808080
+        'highlight': (24, 100%, 50%),     // #ff6500
+        'link': (181, 64%, 26%),          // #186b6d */
+
+
+
+        
